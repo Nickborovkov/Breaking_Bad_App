@@ -1,24 +1,16 @@
-# breaking_bad_app
+# Project that show Breaking Bad and Better Call Saul Series data built with [Breaking Bad API](https://www.breakingbadapi.com/documentation)
 
-## Project setup
-```
-npm install
-```
+## What it can do:
+- The app is responsive
+- Search characters in *Breaking Bad* and *Better Call Saul* series
+- Search episodes in *Breaking Bad* and *Better Call Saul* series
+- Search characters quotes in *Breaking Bad* and *Better Call Saul* series
+- Search characters deaths in *Breaking Bad* and *Better Call Saul* series
+- Show list of characters, episodes, quotes or deaths with selected parameters
 
-### Compiles and hot-reloads for development
-```
-npm run serve
-```
-
-### Compiles and minifies for production
-```
-npm run build
-```
-
-### Lints and fixes files
-```
-npm run lint
-```
-
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
+## Used external libraries
+- VUEX
+- Vue-resource
+- axios
+- Vuetify
+- Vuelidate
