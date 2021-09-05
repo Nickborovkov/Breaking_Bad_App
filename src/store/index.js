@@ -1,11 +1,17 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
+import characters from "./characters";
+import episodes from "./episodes";
+import deaths from "./deaths";
+import quotes from "./quotes";
 
 Vue.use(Vuex)
 
 export default new Vuex.Store({
-  state: {},
-  mutations: {},
-  actions: {},
-  getters: {}
+  modules: {
+    characters,
+    episodes,
+    deaths,
+    quotes,
+  }
 })
