@@ -5,6 +5,7 @@ import Characters from "../components/characters/Characters";
 import Episodes from "../components/episodes/Episodes";
 import Quotes from "../components/quotes/Quotes";
 import Deaths from "../components/deaths/Deaths";
+import Character from "../components/characters/character/Character";
 
 Vue.use(VueRouter)
 
@@ -20,6 +21,12 @@ const routes = [
         component: Characters,
     },
     {
+        path: `/characters/character/:id`,
+        props: true,
+        name: `character`,
+        component: Character,
+    },
+    {
         path: `/episodes`,
         name: `episodes`,
         component: Episodes,
@@ -33,7 +40,7 @@ const routes = [
         path: `/deaths`,
         name: `deaths`,
         component: Deaths,
-    }
+    },
 ]
 
 const router = new VueRouter({
