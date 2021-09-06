@@ -4,10 +4,22 @@ const axiosConfig = axios.create({
     baseURL: 'https://www.breakingbadapi.com/api/'
 })
 
-export const breakingBadApi = {
-    requestCharacters () {
-        return axiosConfig.get('characters')
+
+export const charactersAPI = {
+    requestCharactersByName (name) {
+        return axiosConfig.get(`characters?name=${name}`)
     },
+    requestCharactersByid (id) {
+        return axiosConfig.get(`characters/${id}`)
+    },
+    requestRandomCharacters (count) {
+        return axiosConfig.get(`character/random?limit=${count}`)
+    },
+}
+
+
+export const breakingBadApi = {
+
     requestEpisodes () {
         return axiosConfig.get('episodes')
     },
