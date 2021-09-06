@@ -38,7 +38,7 @@
             }
         },
         created() {
-            this.$store.dispatch(`getCharacters`)
+            this.$store.dispatch(`getRandomCharacters`, 5)
         }
     }
 
