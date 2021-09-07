@@ -34,7 +34,7 @@
       </v-navigation-drawer>
 
     <v-card>
-      <v-toolbar dense color="green" class="rounded-0">
+      <v-toolbar fixed dense color="green" class="rounded-0">
         <v-app-bar-nav-icon class="hidden-md-and-up" @click="sideBar = !sideBar"></v-app-bar-nav-icon>
 
         <v-toolbar-title>
@@ -60,10 +60,14 @@
       <router-view></router-view>
     </v-container>
 
+    <appFooter></appFooter>
+
   </v-app>
 </template>
 
 <script>
+
+  import Footer from "./components/footer/Footer";
 
   export default {
     data () {
@@ -76,6 +80,9 @@
           {title: `Deaths`, icon: `mdi-skull-outline`, url: `/deaths`},
         ]
       }
+    },
+    components: {
+      appFooter: Footer
     }
   }
 
