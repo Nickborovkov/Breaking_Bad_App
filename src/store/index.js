@@ -4,6 +4,7 @@ import characters from "./characters";
 import episodes from "./episodes";
 import deaths from "./deaths";
 import quotes from "./quotes";
+import common from "./common";
 
 Vue.use(Vuex)
 
@@ -13,5 +14,6 @@ export default new Vuex.Store({
     episodes,
     deaths,
     quotes,
+    common,
   }
 })

@@ -1,4 +1,4 @@
-import {breakingBadApi} from "../serverRequests/serverRequests";
+import {deathsAPI} from "../serverRequests/serverRequests";
 
 export default {
     state: {
@@ -11,7 +11,7 @@ export default {
     },
     actions: {
         async getDeaths ({commit}) {
-            const response = await breakingBadApi.requestDeaths()
+            const response = await deathsAPI.requestAllDeaths()
             commit(`setDeaths`, response.data)
         }
     },

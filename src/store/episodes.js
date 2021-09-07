@@ -1,4 +1,4 @@
-import {breakingBadApi} from "../serverRequests/serverRequests";
+import {episodesAPI} from "../serverRequests/serverRequests";
 
 export default {
     state: {
@@ -11,7 +11,7 @@ export default {
     },
     actions: {
         async getEpisodes ({commit}) {
-            const response = await breakingBadApi.requestEpisodes()
+            const response = await episodesAPI.requestAllEpisodes()
             commit(`setEpisodes`, response.data)
         }
     },

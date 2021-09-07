@@ -1,4 +1,4 @@
-import {breakingBadApi} from "../serverRequests/serverRequests";
+import {quotesAPI} from "../serverRequests/serverRequests";
 
 export default {
     state: {
@@ -11,7 +11,7 @@ export default {
     },
     actions: {
         async getQuotes ({commit}) {
-            const response = await breakingBadApi.requestQuotes()
+            const response = await quotesAPI.requestAllQuotes()
             commit(`setQuotes`, response.data)
         }
     },
