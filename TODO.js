@@ -8,3 +8,5 @@
 //TODO `REMOVE CODE repeat in components (title, subtitle)`
 //TODO `ADD footer with (Characters: 62; Episodes: 102; Quotes: 70; Death Count: 271)`
 //TODO `ADD PWA (-ish)`
+//TODO `404 page`
+//TODO `get back from character to characters component (with no parent component rebuild)`
