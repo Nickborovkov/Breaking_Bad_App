@@ -15,18 +15,23 @@ export const charactersAPI = {
     requestRandomCharacters (count) {
         return axiosConfig.get(`character/random?limit=${count}`)
     },
+    requestAllCharacters () {
+        return axiosConfig.get(`characters`)
+    },
 }
 
-
-export const breakingBadApi = {
-
-    requestEpisodes () {
+export const episodesAPI = {
+    requestAllEpisodes () {
         return axiosConfig.get('episodes')
     },
-    requestQuotes () {
+}
+export const quotesAPI = {
+    requestAllQuotes () {
         return axiosConfig.get('quotes')
     },
-    requestDeaths () {
+}
+export const deathsAPI = {
+    requestAllDeaths () {
         return axiosConfig.get('deaths')
     },
 }
