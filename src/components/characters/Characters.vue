@@ -10,16 +10,18 @@
                 <v-container>
                     <v-text-field outlined v-model.number="random" clearable color="green"
                                   label="Or choose amount of random characters"></v-text-field>
-                    <v-btn color="green" @click="getRandom(random)" >
-                        Get random
+                    <v-btn block color="green" @click="getRandom(random)" >
+                        Show random character
                     </v-btn>
                 </v-container>
 
+                <v-btn block color="green" @click="getAllCharacters">Show all characters</v-btn>
 
             </v-flex>
         </v-layout>
 
-        <v-layout wrap justify-center>
+        <appPreloader v-if="isLoading"></appPreloader>
+        <v-layout v-else wrap justify-center>
             <v-flex xs12 sm3 lg4
                     :key="item.char_id"
                     v-for="item in charactersList">
@@ -43,6 +45,7 @@
 
 <script>
     import CharacterSearch from "./searchForm/CharacterSearch";
+    import Preloader from "../../common/Preloader";
 
     export default {
         data: () => ({
@@ -52,6 +55,9 @@
             charactersList () {
                 return this.$store.getters.getCharacters
             },
+            isLoading () {
+                return this.$store.getters.getLoading
+            },
         },
         created() {
             this.$store.dispatch(`getRandomCharacters`, 3)
@@ -59,10 +65,14 @@
         methods: {
             getRandom (value) {
                 this.$store.dispatch(`getRandomCharacters`, value)
+            },
+            getAllCharacters () {
+                this.$store.dispatch(`getAllCharacters`)
             }
         },
         components: {
-            appSearch: CharacterSearch
+            appSearch: CharacterSearch,
+            appPreloader: Preloader,
         }
     }
 
