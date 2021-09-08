@@ -21,17 +21,38 @@ export const charactersAPI = {
 }
 
 export const episodesAPI = {
+    requestEpisodesById (id) {
+        return axiosConfig.get(`episodes/${id}`)
+    },
+    requestEpisodesBySeries (series) {
+        return axiosConfig.get(`episodes?series=${series}`)
+    },
     requestAllEpisodes () {
-        return axiosConfig.get('episodes')
+        return axiosConfig.get(`episodes`)
     },
 }
 export const quotesAPI = {
+    requestQuotesById (id) {
+        return axiosConfig.get(`quotes/${id}`)
+    },
+    requestQuotesByAuthor (author) {
+        return axiosConfig.get(`quote?author=${author}`)
+    },
+    requestQuotesBySeries (series) {
+        return axiosConfig.get(`quote?series=${series}`)
+    },
     requestAllQuotes () {
-        return axiosConfig.get('quotes')
+        return axiosConfig.get(`quotes`)
     },
 }
 export const deathsAPI = {
+    requestDeathByName (name) {
+        return axiosConfig.get(`death?name=${name}`)
+    },
+    requestDeathCount (name) {
+        return axiosConfig.get(`death-count?name=${name}`)
+    },
     requestAllDeaths () {
-        return axiosConfig.get('deaths')
+        return axiosConfig.get(`deaths`)
     },
 }
