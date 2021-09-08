@@ -1,11 +1,11 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
-import Home from "../components/Home";
-import Characters from "../components/characters/Characters";
-import Episodes from "../components/episodes/Episodes";
-import Quotes from "../components/quotes/Quotes";
-import Deaths from "../components/deaths/Deaths";
-import Character from "../components/characters/character/Character";
+import Home from "../components/routedPages/homePage/Home";
+import Characters from "../components/routedPages/characters/Characters";
+import Episodes from "../components/routedPages/episodes/Episodes";
+import Quotes from "../components/routedPages/quotes/Quotes";
+import Deaths from "../components/routedPages/deaths/Deaths";
+import Character from "../components/routedPages/characters/character/Character";
 
 Vue.use(VueRouter)
 

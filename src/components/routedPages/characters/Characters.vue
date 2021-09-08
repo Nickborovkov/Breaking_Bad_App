@@ -45,7 +45,7 @@
 
 <script>
     import CharacterSearch from "./searchForm/CharacterSearch";
-    import Preloader from "../../common/Preloader";
+    import Preloader from "../../../common/preloader/Preloader";
 
     export default {
         data: () => ({

@@ -23,7 +23,7 @@
 </template>
 
 <script>
-    import Preloader from "../../../common/Preloader";
+    import Preloader from "../../../../common/preloader/Preloader";
 
     export default {
         props: [`id`],
