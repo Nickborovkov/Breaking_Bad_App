@@ -1,38 +1,64 @@
 <template>
     <v-container>
-        <h1 class="text-center mt-16 mb-16">CHARACTERS</h1>
+        <h1 class="text-center">CHARACTERS</h1>
 
         <v-layout justify-center>
-            <v-flex xs12 sm6 lg6  class="mt-16 mb-16">
+            <v-flex xs12 sm6 lg6>
 
-                <appSearch></appSearch>
+                <appSearch
+                        formLabel="Start typing name here..."></appSearch>
 
-                <v-container>
-                    <v-text-field outlined v-model.number="random" clearable color="green"
-                                  label="Or choose amount of random characters"></v-text-field>
-                    <v-btn block color="green" @click="getRandom(random)" >
-                        Show random character
+                <v-btn color="green" @click="more = !more">More actions</v-btn>
+
+                <v-container v-if="more">
+                    <v-row>
+                        <v-text-field
+                                outlined
+                                v-model.number="random"
+                                clearable
+                                width="300"
+                                color="green"
+                                label="Choose amount of random characters"
+                        ></v-text-field>
+                        <v-btn
+                                color="green"
+                                @click="getRandom(random)"
+                        >
+                            Show {{random}} random characters
+                        </v-btn>
+
+                    </v-row>
+
+                    <v-btn
+                            color="green"
+                            @click="getAllCharacters"
+                    >Show all characters
                     </v-btn>
+
                 </v-container>
 
-                <v-btn block color="green" @click="getAllCharacters">Show all characters</v-btn>
 
             </v-flex>
         </v-layout>
 
         <appPreloader v-if="isLoading"></appPreloader>
-        <v-layout v-else wrap justify-center>
-            <v-flex xs12 sm3 lg4
+        <v-layout
+                v-else
+                wrap
+                justify-center>
+            <v-flex xs12 sm4 lg3
                     :key="item.char_id"
                     v-for="item in charactersList">
-                <v-card class="ma-3" :to="`characters/character/${item.char_id}`">
+                <v-card
+                        class="ma-3"
+                        :to="`characters/character/${item.char_id}`">
                     <v-img
                             :src="item.img"
                             height="500"
                     ></v-img>
 
                     <v-card-title>
-                        {{item.name}}
+                        <h2 class="text-center">{{item.name}}</h2>
                     </v-card-title>
 
                 </v-card>
@@ -44,12 +70,13 @@
 </template>
 
 <script>
-    import CharacterSearch from "./searchForm/CharacterSearch";
     import Preloader from "../../../common/preloader/Preloader";
+    import SearchForm from "../../../common/searchForm/SearchForm";
 
     export default {
         data: () => ({
             random: null,
+            more: false
         }),
         computed: {
             charactersList () {
@@ -60,7 +87,7 @@
             },
         },
         created() {
-            this.$store.dispatch(`getRandomCharacters`, 3)
+            this.$store.dispatch(`getRandomCharacters`, 6)
         },
         methods: {
             getRandom (value) {
@@ -71,7 +98,7 @@
             }
         },
         components: {
-            appSearch: CharacterSearch,
+            appSearch: SearchForm,
             appPreloader: Preloader,
         }
     }

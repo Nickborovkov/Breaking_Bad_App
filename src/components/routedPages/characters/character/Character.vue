@@ -8,9 +8,26 @@
             <v-btn color="green" to="/characters">Back to list</v-btn>
 
             <h1 class="text-center text-sm-h2 mt-16 mb-16">{{specificCharacter.name}}</h1>
-            <v-layout>
-                <v-flex><v-img width="500" :src="specificCharacter.img"></v-img></v-flex>
-                <v-flex>
+            <v-layout wrap justify-center>
+                <v-flex xs12 sm6>
+                    <v-dialog width="1000">
+
+                        <template v-slot:activator="{ on, attrs }">
+                            <v-img class="charImg"
+                                    v-on="on"
+                                    v-bind="attrs"
+                                    width="500"
+                                    :src="specificCharacter.img"></v-img>
+                        </template>
+
+                        <v-card class="charImg">
+                            <v-img :src="specificCharacter.img"></v-img>
+                        </v-card>
+
+                    </v-dialog>
+
+                </v-flex>
+                <v-flex xs12 sm6>
                     <div :key="item" v-for="item in specificCharacterItems">
                         <h3>{{item.title}}</h3>
                         <p class="ml-5">{{item.inner}}</p>
@@ -58,3 +75,9 @@
         }
     }
 </script>
+
+<style scoped>
+    .charImg{
+        cursor: pointer;
+    }
+</style>
