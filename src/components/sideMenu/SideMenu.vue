@@ -42,7 +42,11 @@
     export default {
         props: {
             menuItems: Array,
-            sideBar: Boolean,
+        },
+        computed: {
+            sideBar () {
+                return this.$store.getters.getSideBar
+            }
         }
     }
 </script>

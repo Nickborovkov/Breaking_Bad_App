@@ -8,7 +8,7 @@
             >
                 <v-app-bar-nav-icon
                         class="hidden-md-and-up"
-                        @click="sideBar = !sideBar"
+                        @click="toggleSidebar"
                 ></v-app-bar-nav-icon>
 
                 <v-toolbar-title>
@@ -43,8 +43,12 @@
     export default {
         props: {
             menuItems: Array,
-            sideBar: Boolean,
-        }
+        },
+        methods: {
+            toggleSidebar () {
+                return this.$store.commit(`toggleSidebar`)
+            }
+        },
     }
 </script>
 
