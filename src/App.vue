@@ -2,12 +2,10 @@
   <v-app>
 
     <appNavbar
-            :menuItems="menuItems"
-            :sideBar="sideBar"></appNavbar>
+            :menuItems="menuItems"></appNavbar>
 
     <appSidemenu
-            :menuItems="menuItems"
-            :sideBar="sideBar"></appSidemenu>
+            :menuItems="menuItems"></appSidemenu>
 
     <v-container>
       <router-view></router-view>
@@ -40,7 +38,7 @@
       appNavbar: Navbar,
       appSidemenu: SideMenu,
       appFooter: Footer,
-    }
+    },
   }
 
 </script>
