@@ -10,10 +10,18 @@ export default {
         }
     },
     actions: {
-        async getEpisodes ({commit}) {
-            const response = await episodesAPI.requestAllEpisodes()
+        async getEpisodesBySeries ({commit}, series) {
+            commit(`setLoading`, true)
+            const response = await episodesAPI.requestEpisodesBySeries(series)
+            commit(`setLoading`, false)
             commit(`setEpisodes`, response.data)
-        }
+        },
+        async getAllEpisodes ({commit}) {
+            commit(`setLoading`, true)
+            const response = await episodesAPI.requestAllEpisodes()
+            commit(`setLoading`, false)
+            commit(`setEpisodes`, response.data)
+        },
     },
     getters: {
         getEpisodes (state) {
