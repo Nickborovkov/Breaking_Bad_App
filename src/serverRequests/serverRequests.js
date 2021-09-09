@@ -21,9 +21,6 @@ export const charactersAPI = {
 }
 
 export const episodesAPI = {
-    requestEpisodesById (id) {
-        return axiosConfig.get(`episodes/${id}`)
-    },
     requestEpisodesBySeries (series) {
         return axiosConfig.get(`episodes?series=${series}`)
     },
@@ -32,14 +29,11 @@ export const episodesAPI = {
     },
 }
 export const quotesAPI = {
-    requestQuotesById (id) {
-        return axiosConfig.get(`quotes/${id}`)
-    },
     requestQuotesByAuthor (author) {
         return axiosConfig.get(`quote?author=${author}`)
     },
     requestQuotesBySeries (series) {
-        return axiosConfig.get(`quote?series=${series}`)
+        return axiosConfig.get(`quotes?series=${series}`)
     },
     requestAllQuotes () {
         return axiosConfig.get(`quotes`)
