@@ -4,7 +4,7 @@
 
         <v-layout justify-center>
             <v-flex xs12 sm6 lg8>
-                <v-carousel cycle>
+                <v-carousel cycle delimiter-icon="mdi-minus" show-arrows-on-hover>
                     <v-carousel-item
                             v-for="item in charactersList"
                             :key="item.char_id"
