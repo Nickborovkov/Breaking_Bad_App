@@ -5,34 +5,67 @@
 
         <v-container v-else>
 
-            <v-btn color="green" to="/characters">Back to list</v-btn>
+            <v-layout justify-center>
+                <v-flex xs12 md6 >
+                    <v-btn
+                            block
+                            color="green"
+                            to="/characters">Back to list</v-btn>
+                </v-flex>
+            </v-layout>
 
-            <h1 class="text-center text-sm-h2 mt-16 mb-16">{{specificCharacter.name}}</h1>
+            <h1 class="text-center text-uppercase mt-5 mb-10">{{specificCharacter.name}}</h1>
+
             <v-layout wrap justify-center>
-                <v-flex xs12 sm6>
+                <v-flex xs12 sm12 md6 lg6>
                     <v-dialog width="1000">
 
                         <template v-slot:activator="{ on, attrs }">
-                            <v-img class="charImg"
-                                    v-on="on"
-                                    v-bind="attrs"
-                                    width="500"
-                                    :src="specificCharacter.img"></v-img>
+
+                            <v-layout justify-center class="pl-5 pr-5">
+                                    <v-img class="charImg rounded-lg"
+                                           v-on="on"
+                                           v-bind="attrs"
+                                           width="600"
+                                           :src="specificCharacter.img"></v-img>
+                            </v-layout>
+
                         </template>
 
-                        <v-card class="charImg">
-                            <v-img :src="specificCharacter.img"></v-img>
-                        </v-card>
+                        <v-img
+                                class="charImg"
+                                :src="specificCharacter.img"></v-img>
+
 
                     </v-dialog>
 
                 </v-flex>
-                <v-flex xs12 sm6>
-                    <div :key="item" v-for="item in specificCharacterItems">
-                        <h3>{{item.title}}</h3>
-                        <p class="ml-5">{{item.inner}}</p>
-                    </div>
-                </v-flex>
+                    <v-flex xs12 sm12 md6 lg6>
+                        <div
+                                :key="item.char_id"
+                                v-for="item in specificCharacterItems"
+                                class="mb-5"
+                        >
+                            <h2>{{item.inner.length > 0
+                                ? item.title + `:`
+                                : null}}</h2>
+
+                            <div v-if="typeof item.inner === `object`">
+                                <ul>
+<!--                                    <li :key="subItem" v-for="subItem in item.inner">-->
+<!--                                        Season {{subItem}}-->
+<!--                                    </li>-->
+
+                                    <li :key="subItem" v-for="subItem in item.inner">
+                                        {{item.title === `Occupation` ? subItem : `Season ` + subItem}}
+                                    </li>
+
+                                </ul>
+                            </div>
+                            <p v-else>{{item.inner.length>0 ? item.inner: null}}</p>
+                        </div>
+
+                    </v-flex>
             </v-layout>
         </v-container>
 
@@ -49,7 +82,7 @@
                 return this.$store.getters.getSpecificCharacter
             },
             specificCharacterItems () {
-                const state =  this.$store.getters.getSpecificCharacter
+                const state = this.$store.getters.getSpecificCharacter
                 const items =  [
                     {title: `Name`, inner: state.name},
                     {title: `Nickname`, inner: state.nickname},
