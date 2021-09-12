@@ -27,7 +27,7 @@
       return {
         sideBar: false,
         menuItems: [
-          {title: `Characters`, icon: `mdi-face`, url: `/characters`},
+          {title: `Characters`, icon: `mdi-account-supervisor-circle`, url: `/characters`},
           {title: `Episodes`, icon: `mdi-movie-roll`, url: `/episodes`},
           {title: `Quotes`, icon: `mdi-format-quote-open-outline`, url: `/quotes`},
           {title: `Deaths`, icon: `mdi-skull-outline`, url: `/deaths`},
