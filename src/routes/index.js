@@ -5,7 +5,8 @@ import Characters from "../components/routedPages/characters/Characters";
 import Episodes from "../components/routedPages/episodes/Episodes";
 import Quotes from "../components/routedPages/quotes/Quotes";
 import Deaths from "../components/routedPages/deaths/Deaths";
-import Character from "../components/routedPages/characters/character/Character";
+import Page404 from "../common/page404/Page404";
+import CharacterById from "../components/routedPages/characters/characterById/CharacterById";
 
 Vue.use(VueRouter)
 
@@ -24,7 +25,7 @@ const routes = [
         path: `/characters/character/:id`,
         props: true,
         name: `character`,
-        component: Character,
+        component: CharacterById,
     },
     {
         path: `/episodes`,
@@ -40,6 +41,11 @@ const routes = [
         path: `/deaths`,
         name: `deaths`,
         component: Deaths,
+    },
+    {
+        path: `*`,
+        name: `404`,
+        component: Page404,
     },
 ]
 
