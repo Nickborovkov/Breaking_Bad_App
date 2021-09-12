@@ -1,29 +1,52 @@
 <template>
     <v-container>
-        <h1>EPISODES</h1>
+        <h1 class="text-center mt-5 mb-5">EPISODES</h1>
 
-        <v-btn
-                color="green"
-                @click="getBreakingBadEpisodes"
-        >Breaking Bad Episodes
-        </v-btn>
-        <v-btn
-                color="green"
-                @click="getBetterCallSaulEpisodes"
-        >Better Call Saul episodes
-        </v-btn>
+        <v-layout justify-center class="mb-5">
+            <v-btn
+                    color="green"
+                    @click="brBadShow"
+            >
+                <v-icon left v-if="!breakingBadSeasons">mdi-flask</v-icon>
+                <v-icon left v-if="breakingBadSeasons">mdi-close</v-icon>
+                Breaking Bad Episodes
+            </v-btn>
 
-        <v-container>
-            <v-row>
-                <v-btn :key="btn" v-for="btn in 5" color="green">Season {{btn}}</v-btn>
-            </v-row>
-        </v-container>
+            <v-btn
+                    color="green"
+                    @click="betSaulShow"
+            >
+                <v-icon left v-if="!betterCallSaulSeasons">mdi-pistol</v-icon>
+                <v-icon left v-if="betterCallSaulSeasons">mdi-close</v-icon>
+                Better Call Saul episodes
+            </v-btn>
+        </v-layout>
 
-        <v-container>
-            <v-row>
-                <v-btn :key="btn" v-for="btn in 4" color="green">Season {{btn}}</v-btn>
-            </v-row>
-        </v-container>
+
+        <v-layout justify-center v-if="breakingBadSeasons">
+            <v-btn color="green"
+                   class="ml-2 mr-2"
+                   @click="getBreakingBadEpisodes">All
+            </v-btn>
+            <v-btn :key="btn"
+                   class="ml-2 mr-2"
+                   v-for="btn in 5"
+                   @click="getEpisodesBySeason(`Breaking+Bad`, btn)"
+                   color="green">Season {{btn}}
+            </v-btn>
+
+        </v-layout>
+
+        <v-layout justify-center v-if="betterCallSaulSeasons">
+                <v-btn color="green"
+                       class="ml-2 mr-2"
+                       @click="getBetterCallSaulEpisodes">All</v-btn>
+                <v-btn :key="btn"
+                       class="ml-2 mr-2"
+                       v-for="btn in 4"
+                       @click="getEpisodesBySeason(`Better+Call+Saul`, btn)"
+                       color="green">Season {{btn}}</v-btn>
+        </v-layout>
 
 
         <appPreloader v-if="isLoading"></appPreloader>
@@ -31,11 +54,12 @@
         <v-layout
                 v-else
                 wrap
+                justify-center
         >
             <v-flex xs12 sm4
                     :key="episode.episode_id"
                     v-for="episode in episodesList">
-                <v-card class="ma-3">
+                <v-card class="ma-3 pa-3" elevation="8">
                     <v-card-title>
                         Episode name:
                     </v-card-title>
@@ -51,6 +75,14 @@
                     </v-card-subtitle>
 
                     <v-card-title>
+                        Season:
+                    </v-card-title>
+
+                    <v-card-subtitle>
+                        {{episode.season}}
+                    </v-card-subtitle>
+
+                    <v-card-title>
                         Episode number:
                     </v-card-title>
                     <v-card-subtitle>
@@ -59,14 +91,16 @@
 
                     <v-dialog width="800">
                         <template v-slot:activator="{ on, attrs }">
-                            <v-btn
-                                    color="green"
-                                    dark
-                                    v-bind="attrs"
-                                    v-on="on"
-                            >
-                                More info
-                            </v-btn>
+                            <v-layout justify-center>
+                                <v-btn
+                                        color="green"
+                                        v-bind="attrs"
+                                        v-on="on"
+                                >
+                                    More info
+                                </v-btn>
+                            </v-layout>
+
                         </template>
 
                         <v-card>
@@ -139,6 +173,12 @@
     import Preloader from "../../../common/preloader/Preloader";
 
     export default {
+        data () {
+            return {
+                breakingBadSeasons: false,
+                betterCallSaulSeasons: false,
+            }
+        },
         computed: {
             episodesList() {
                 return this.$store.getters.getEpisodes
@@ -148,15 +188,30 @@
             },
         },
         created() {
-            this.$store.dispatch(`getAllEpisodes`)
+            this.$store.dispatch(`getEpisodesBySeason`, {series:`Breaking+Bad`, season:1})
         },
         methods: {
             getBreakingBadEpisodes() {
                 this.$store.dispatch(`getEpisodesBySeries`, `Breaking+Bad`)
+                this.breakingBadSeasons = false
             },
             getBetterCallSaulEpisodes() {
                 this.$store.dispatch(`getEpisodesBySeries`, `Better+Call+Saul`)
+                this.betterCallSaulSeasons = false
             },
+            brBadShow () {
+                this.breakingBadSeasons = !this.breakingBadSeasons
+                this.betterCallSaulSeasons = false
+            },
+            betSaulShow () {
+                this.betterCallSaulSeasons = !this.betterCallSaulSeasons
+                this.breakingBadSeasons = false
+            },
+            getEpisodesBySeason (series, season) {
+                this.$store.dispatch(`getEpisodesBySeason`, {series, season})
+                this.breakingBadSeasons = false
+                this.betterCallSaulSeasons = false
+            }
         },
         components: {
             appPreloader: Preloader,
@@ -164,7 +219,3 @@
     }
 
 </script>
-
-<style scoped>
-
-</style>
