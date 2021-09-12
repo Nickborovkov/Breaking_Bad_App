@@ -1,43 +1,60 @@
 <template>
     <v-container>
-        <h1 class="text-center">CHARACTERS</h1>
+        <h1 class="text-center mt-5 mb-5">CHARACTERS</h1>
 
         <v-layout justify-center>
-            <v-flex xs12 sm6 lg6>
+            <v-flex xs12 md8>
 
                 <appSearch
-                        formLabel="Start typing name here..."></appSearch>
+                        formLabel="Start typing name here..."
+                        :getItems="getCharacterByName"></appSearch>
 
-                <v-btn color="green" @click="more = !more">More actions</v-btn>
+                <v-layout justify-center>
+                    <v-btn
+                            color="green"
+                            @click="more = !more"
+                    >
+                        <v-icon left v-if="more">mdi-close</v-icon>
+                        <v-icon left v-else>mdi-chevron-down</v-icon>
+                        {{more ? `Close actions` : `More actions`}}
+                    </v-btn>
+                </v-layout>
 
-                <v-container v-if="more">
-                    <v-row>
-                        <v-text-field
-                                outlined
-                                v-model.number="random"
-                                clearable
-                                width="300"
-                                color="green"
-                                label="Choose amount of random characters"
-                        ></v-text-field>
-                        <v-btn
-                                color="green"
-                                @click="getRandom(random)"
-                        >
-                            Show {{random}} random characters
-                        </v-btn>
+                <v-container v-if="more" class="mt-5 mb-5">
+                    <v-layout justify-center  class="mt-5 mb-5" wrap>
+                        <v-flex xs12 sm12 md12 lg6>
+                            <v-slider md12 lg6
+                                      v-model="random"
+                                      color="green"
+                                      track-color="grey"
+                                      max="62"
+                                      min="0"
+                                      thumb-label="always"
+                                      ticks
+                                      hint="Choose amount of random characters"
+                            ></v-slider>
 
-                    </v-row>
+
+                        </v-flex>
+
+                        <v-flex xs12 sm12 md12 lg6>
+                            <v-btn
+                                    block
+                                    color="green"
+                                    @click="getRandom(random)"
+                            >
+                                Show {{random}} random
+                            </v-btn>
+                        </v-flex>
+                    </v-layout>
 
                     <v-btn
                             color="green"
+                            block
                             @click="getAllCharacters"
                     >Show all characters
                     </v-btn>
-
                 </v-container>
-
-
             </v-flex>
         </v-layout>
 
@@ -45,7 +62,7 @@
         <v-layout
                 v-else
                 wrap
-                justify-center>
+                justify-center class="mt-5 mb-5">
             <v-flex xs12 sm4 lg3
                     :key="item.char_id"
                     v-for="item in charactersList">
@@ -58,7 +75,7 @@
                     ></v-img>
 
                     <v-card-title>
-                        <h2 class="text-center">{{item.name}}</h2>
+                        <h3 class="text-center">{{item.name}}</h3>
                     </v-card-title>
 
                 </v-card>
@@ -76,25 +93,33 @@
     export default {
         data: () => ({
             random: null,
-            more: false
+            more: false,
+            charactersSlider: 0
         }),
         computed: {
-            charactersList () {
+            charactersList() {
                 return this.$store.getters.getCharacters
             },
-            isLoading () {
+            isLoading() {
                 return this.$store.getters.getLoading
             },
         },
         created() {
-            this.$store.dispatch(`getRandomCharacters`, 6)
+            this.$store.dispatch(`getRandomCharacters`, 8)
         },
         methods: {
-            getRandom (value) {
+            getRandom(value) {
                 this.$store.dispatch(`getRandomCharacters`, value)
+                this.more = false
+                window.scrollTo(0,300,)
             },
-            getAllCharacters () {
+            getAllCharacters() {
                 this.$store.dispatch(`getAllCharacters`)
+                this.more = false
+                window.scrollTo(0,300,)
+            },
+            getCharacterByName(value) {
+                this.$store.dispatch(`getCharactersByName`, value)
             }
         },
         components: {
@@ -104,7 +129,3 @@
     }
 
 </script>
-
-<style scoped>
-
-</style>
