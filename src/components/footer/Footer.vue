@@ -1,18 +1,24 @@
 <template>
     <v-footer color="green">
-        <v-layout>
+        <v-layout justify-center wrap>
 
-            <v-flex>
-                <a href="https://www.breakingbadapi.com/documentation">API provided by TheBreaking Bad API</a>
-            </v-flex>
+            <v-layout justify-center xs12 md6>
+                <v-btn
+                        text
+                        :href="`https://www.breakingbadapi.com/documentation`"
+                >
+                    <v-icon left>mdi-link</v-icon>
+                    The Breaking Bad API
+                </v-btn>
+            </v-layout>
 
-            <v-flex>
-
-            </v-flex>
-
-            <v-flex>
-                Made by Nick Borovkov
-            </v-flex>
+            <v-layout justify-center xs12 md6>
+                <v-btn text :href="`https://github.com/Nickborovkov`"
+                >
+                    <v-icon left>mdi-github</v-icon>
+                    Made by Nick Borovkov
+                </v-btn>
+            </v-layout>
 
         </v-layout>
     </v-footer>
