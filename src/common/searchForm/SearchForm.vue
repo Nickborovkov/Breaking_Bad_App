@@ -1,15 +1,15 @@
 <template>
     <v-container>
-
+<!--        :error-messages="formErrors"-->
+<!--        @input="getItemsByName(formInput)"-->
         <v-text-field
                 outlined
-                v-model="characterInput"
-                :error-messages="characterErrors"
+                v-model="formInput"
+
                 :label="formLabel"
-                clearable
                 color="green"
-                @keydown.enter="getCharactersByName(characterInput)"
-                @input="getCharactersByName(characterInput)"
+                @keydown.enter="getItemsByName(formInput)"
+
         ></v-text-field>
     </v-container>
 </template>
@@ -18,30 +18,33 @@
 
     import {alpha} from 'vuelidate/lib/validators'
 
+    // const customValidator = (value) =>
+
     export default {
         data: () => ({
-            characterInput: '',
+            formInput: '',
         }),
         props: {
-            formLabel: String
+            formLabel: String,
+            getItems: Function
         },
         validations: {
-            characterInput: {alpha}
+            formInput: {alpha}
         },
         computed: {
-            characterErrors() {
-                const errors = []
-                if (!this.$v.characterInput.$dirty) return errors
-                !this.$v.characterInput.alpha && errors.push('Only English letters')
-                return errors
-            },
+            // formErrors() {
+            //     const errors = []
+            //     if (!this.$v.formInput.$dirty) return errors
+            //     !this.$v.formInput.alpha && errors.push('Only English letters')
+            //     return errors
+            // },
         },
         methods: {
-            getCharactersByName(value) {
-                this.$v.characterInput.$touch()
-                if (this.$v.characterInput.alpha && this.characterInput !== ``) {
-                    this.$store.dispatch(`getCharactersByName`, value)
-                }
+            getItemsByName(value) {
+                // this.$v.formInput.$touch()
+                // if (this.$v.formInput.alpha && this.formInput !== ``) {
+                    this.getItems(value)
+                // }
             },
         },
     }
