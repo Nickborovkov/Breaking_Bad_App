@@ -1,8 +1,9 @@
 <template>
     <v-container>
-        <h1>QUOTES</h1>
+        <h1 class="text-center mt-5 mb-5">QUOTES</h1>
 
-        <appSearchForm formLabel="Enter Character name to see his quotes"></appSearchForm>
+        <appSearchForm formLabel="Enter Character name to see his quotes"
+                       :getItems="getQuotesByAuthor"></appSearchForm>
 
         <v-container>
             <v-row>
@@ -76,6 +77,9 @@
             },
             getBetterCallSaulQuotes () {
                 this.$store.dispatch(`getQuotesBySeries`, `Better+Call+Saul`)
+            },
+            getQuotesByAuthor (author) {
+                this.$store.dispatch(`getQuotesByAuthor`, author)
             }
         },
         components: {
@@ -85,7 +89,3 @@
     }
 
 </script>
-
-<style scoped>
-
-</style>
