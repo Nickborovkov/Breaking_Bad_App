@@ -10,3 +10,4 @@
 //TODO `check adaptivity`
 //TODO `finish quotes and deaths pages`
 //TODO `deploy to github pages`
+//TODO `add links in rendered components`
