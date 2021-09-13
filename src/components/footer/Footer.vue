@@ -5,6 +5,7 @@
             <v-layout justify-center xs12 md6>
                 <v-btn
                         text
+                        target="_blank"
                         :href="`https://www.breakingbadapi.com/documentation`"
                 >
                     <v-icon left>mdi-link</v-icon>
@@ -13,7 +14,10 @@
             </v-layout>
 
             <v-layout justify-center xs12 md6>
-                <v-btn text :href="`https://github.com/Nickborovkov`"
+                <v-btn
+                        text
+                        target="_blank"
+                        :href="`https://github.com/Nickborovkov`"
                 >
                     <v-icon left>mdi-github</v-icon>
                     Made by Nick Borovkov

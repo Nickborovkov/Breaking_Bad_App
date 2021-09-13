@@ -2,19 +2,21 @@
     <v-container>
         <h1 class="text-center mt-5 mb-5">EPISODES</h1>
 
-        <v-layout justify-center class="mb-5">
-            <v-btn
+        <v-layout wrap justify-center class="mb-5">
+            <v-btn xs12 md6
                     color="green"
                     @click="brBadShow"
+                    class="ma-2"
             >
                 <v-icon left v-if="!breakingBadSeasons">mdi-flask</v-icon>
                 <v-icon left v-if="breakingBadSeasons">mdi-close</v-icon>
                 Breaking Bad Episodes
             </v-btn>
 
-            <v-btn
+            <v-btn xs12 md6
                     color="green"
                     @click="betSaulShow"
+                    class="ma-2"
             >
                 <v-icon left v-if="!betterCallSaulSeasons">mdi-pistol</v-icon>
                 <v-icon left v-if="betterCallSaulSeasons">mdi-close</v-icon>
@@ -23,13 +25,15 @@
         </v-layout>
 
 
-        <v-layout justify-center v-if="breakingBadSeasons">
+        <v-layout wrap justify-center v-if="breakingBadSeasons">
             <v-btn color="green"
-                   class="ml-2 mr-2"
+                   class="ma-1"
+                   small
                    @click="getBreakingBadEpisodes">All
             </v-btn>
             <v-btn :key="btn"
-                   class="ml-2 mr-2"
+                   class="ma-1"
+                   small
                    v-for="btn in 5"
                    @click="getEpisodesBySeason(`Breaking+Bad`, btn)"
                    color="green">Season {{btn}}
@@ -37,13 +41,15 @@
 
         </v-layout>
 
-        <v-layout justify-center v-if="betterCallSaulSeasons">
+        <v-layout wrap justify-center v-if="betterCallSaulSeasons">
                 <v-btn color="green"
-                       class="ml-2 mr-2"
+                       class="ma-1"
+                       small
                        @click="getBetterCallSaulEpisodes">All</v-btn>
                 <v-btn :key="btn"
-                       class="ml-2 mr-2"
+                       class="ma-1"
                        v-for="btn in 4"
+                       small
                        @click="getEpisodesBySeason(`Better+Call+Saul`, btn)"
                        color="green">Season {{btn}}</v-btn>
         </v-layout>

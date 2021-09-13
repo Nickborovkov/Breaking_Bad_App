@@ -40,6 +40,7 @@
                         <v-flex xs12 sm12 md12 lg6>
                             <v-btn
                                     block
+                                    small
                                     color="green"
                                     @click="getRandom(random)"
                             >
@@ -51,6 +52,7 @@
                     <v-btn
                             color="green"
                             block
+                            small
                             @click="getAllCharacters"
                     >Show all characters
                     </v-btn>

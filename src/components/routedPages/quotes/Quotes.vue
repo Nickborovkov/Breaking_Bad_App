@@ -5,13 +5,43 @@
         <appSearchForm formLabel="Enter Character name to see his quotes"
                        :getItems="getQuotesByAuthor"></appSearchForm>
 
-        <v-container>
-            <v-row>
-                <v-btn color="green">Show all quotes</v-btn>
-                <v-btn color="green" @click="getBreakingBadQuotes">Show all Breaking Bad quotes</v-btn>
-                <v-btn color="green" @click="getBetterCallSaulQuotes">Show all Better Call Saul quotes</v-btn>
-            </v-row>
-        </v-container>
+        <v-layout justify-center>
+            <v-btn
+                    color="green"
+                    @click="more = !more"
+            >
+                <v-icon left v-if="more">mdi-close</v-icon>
+                <v-icon left v-else>mdi-chevron-down</v-icon>
+                {{more ? `Close actions` : `More actions`}}
+            </v-btn>
+        </v-layout>
+
+        <v-layout class="ma-2" justify-center wrap v-if="more">
+                <v-btn
+                        class="ma-2"
+                        color="green"
+                        small
+                        @click="getAllQuotes"
+                >
+                    Show all quotes
+                </v-btn>
+                <v-btn
+                        class="ma-2"
+                        small
+                        color="green"
+                        @click="getBreakingBadQuotes"
+                >
+                    Show all Breaking Bad quotes
+                </v-btn>
+                <v-btn
+                        class="ma-2"
+                        color="green"
+                        small
+                        @click="getBetterCallSaulQuotes"
+                >
+                    Show all Better Call Saul quotes
+                </v-btn>
+        </v-layout>
 
         <appPreloader v-if="isLoading"></appPreloader>
 
@@ -19,7 +49,7 @@
             <v-flex xs12 sm4
                     :key="quote.quote_id"
                     v-for="quote in quotesList">
-                <v-card class="ma-3">
+                <v-card class="ma-3" height="350">
                     <v-card-title>
                         Quote:
                     </v-card-title>
@@ -57,6 +87,11 @@
     import Preloader from "../../../common/preloader/Preloader";
 
     export default {
+        data () {
+            return {
+                more: false
+            }
+        },
         computed: {
             quotesList () {
                 return this.$store.getters.getQuotes
@@ -71,12 +106,15 @@
         methods: {
             getAllQuotes () {
                 this.$store.dispatch(`getAllQuotes`)
+                this.more = false
             },
             getBreakingBadQuotes () {
                 this.$store.dispatch(`getQuotesBySeries`, `Breaking+Bad`)
+                this.more = false
             },
             getBetterCallSaulQuotes () {
                 this.$store.dispatch(`getQuotesBySeries`, `Better+Call+Saul`)
+                this.more = false
             },
             getQuotesByAuthor (author) {
                 this.$store.dispatch(`getQuotesByAuthor`, author)

@@ -52,9 +52,6 @@
 
                             <div v-if="typeof item.inner === `object`">
                                 <ul>
-<!--                                    <li :key="subItem" v-for="subItem in item.inner">-->
-<!--                                        Season {{subItem}}-->
-<!--                                    </li>-->
 
                                     <li :key="subItem" v-for="subItem in item.inner">
                                         {{item.title === `Occupation` ? subItem : `Season ` + subItem}}
