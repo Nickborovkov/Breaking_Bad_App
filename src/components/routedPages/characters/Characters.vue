@@ -6,8 +6,10 @@
             <v-flex xs12 md8>
 
                 <appSearch
-                        formLabel="Start typing name here..."
-                        :getItems="getCharacterByName"></appSearch>
+                        formLabel="Start typing name here"
+                        formHint=""
+                        :getItems="getCharacterByName"
+                        parentType="characters"></appSearch>
 
                 <v-layout justify-center>
                     <v-btn
@@ -21,7 +23,7 @@
                 </v-layout>
 
                 <v-container v-if="more" class="mt-5 mb-5">
-                    <v-layout justify-center  class="mt-5 mb-5" wrap>
+                    <v-layout justify-center class="mt-5 mb-5" wrap>
                         <v-flex xs12 sm12 md12 lg6>
                             <v-slider md12 lg6
                                       v-model="random"
@@ -33,7 +35,6 @@
                                       ticks
                                       hint="Choose amount of random characters"
                             ></v-slider>
-
 
                         </v-flex>
 
@@ -54,34 +55,44 @@
                             block
                             small
                             @click="getAllCharacters"
-                    >Show all characters
+                    >
+                        <v-icon left>mdi-format-list-text</v-icon>
+                        Show all characters
                     </v-btn>
                 </v-container>
             </v-flex>
         </v-layout>
 
         <appPreloader v-if="isLoading"></appPreloader>
+
         <v-layout
                 v-else
                 wrap
                 justify-center class="mt-5 mb-5">
-            <v-flex xs12 sm4 lg3
-                    :key="item.char_id"
-                    v-for="item in charactersList">
-                <v-card
-                        class="ma-3"
-                        :to="`characters/character/${item.char_id}`">
-                    <v-img
-                            :src="item.img"
-                            height="500"
-                    ></v-img>
 
-                    <v-card-title>
-                        <h3 class="text-center">{{item.name}}</h3>
-                    </v-card-title>
 
-                </v-card>
-            </v-flex>
+                <v-flex xs12 sm4 lg3
+                        :key="item.char_id"
+                        v-for="item in charactersList">
+                    <v-lazy :options="{threshold: .2}"
+                            transition="fade-transition">
+                    <v-card elevation="12"
+                            class="ma-3"
+                            :to="`characters/character/${item.char_id}`">
+                        <v-img
+                                :src="item.img"
+                                height="500"
+                        ></v-img>
+
+                        <v-card-title>
+                            <h3 class="text-center d-block text-truncate">{{item.name}}</h3>
+                        </v-card-title>
+
+                    </v-card>
+                    </v-lazy>
+                </v-flex>
+
+
         </v-layout>
 
 
