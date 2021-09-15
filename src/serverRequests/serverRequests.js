@@ -24,9 +24,6 @@ export const episodesAPI = {
     requestEpisodesBySeries (series) {
         return axiosConfig.get(`episodes?series=${series}`)
     },
-    requestAllEpisodes () {
-        return axiosConfig.get(`episodes`)
-    },
 }
 export const quotesAPI = {
     requestQuotesByAuthor (author) {
@@ -38,6 +35,9 @@ export const quotesAPI = {
     requestAllQuotes () {
         return axiosConfig.get(`quotes`)
     },
+    requestRandomQuote () {
+        return axiosConfig.get(`quote/random`)
+    },
 }
 export const deathsAPI = {
     requestDeathByName (name) {
@@ -48,5 +48,8 @@ export const deathsAPI = {
     },
     requestAllDeaths () {
         return axiosConfig.get(`deaths`)
+    },
+    requestRandomDeath () {
+        return axiosConfig.get(`/random-death`)
     },
 }
