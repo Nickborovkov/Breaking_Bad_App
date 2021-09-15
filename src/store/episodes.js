@@ -22,12 +22,6 @@ export default {
             commit(`setLoading`, false)
             commit(`setEpisodes`, response.data.filter(item => item.season == payload.season))
         },
-        // async getAllEpisodes ({commit}) {
-        //     commit(`setLoading`, true)
-        //     const response = await episodesAPI.requestAllEpisodes()
-        //     commit(`setLoading`, false)
-        //     commit(`setEpisodes`, response.data)
-        // },
     },
     getters: {
         getEpisodes (state) {

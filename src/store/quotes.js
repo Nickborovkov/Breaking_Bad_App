@@ -27,6 +27,12 @@ export default {
             const response = await quotesAPI.requestAllQuotes()
             commit(`setLoading`, false)
             commit(`setQuotes`, response.data)
+        },
+        async getRandomQuote ({commit}) {
+            commit(`setLoading`, true)
+            const response = await quotesAPI.requestRandomQuote()
+            commit(`setLoading`, false)
+            commit(`setQuotes`, response.data[0])
         }
     },
     getters: {

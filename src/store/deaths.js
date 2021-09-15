@@ -11,7 +11,27 @@ export default {
     },
     actions: {
         async getDeaths ({commit}) {
+            commit(`setLoading`, true)
             const response = await deathsAPI.requestAllDeaths()
+            commit(`setLoading`, false)
+            commit(`setDeaths`, response.data)
+        },
+        async getDeathsByName ({commit}, name) {
+            commit(`setLoading`, true)
+            const response = await deathsAPI.requestDeathByName(name)
+            commit(`setLoading`, false)
+            commit(`setDeaths`, response.data)
+        },
+        async getCharacterDeathsCount ({commit}, name) {
+            commit(`setLoading`, true)
+            const response = await deathsAPI.requestDeathCount(name)
+            commit(`setLoading`, false)
+            commit(`setDeaths`, response.data)
+        },
+        async getRandomDeath ({commit}) {
+            commit(`setLoading`, true)
+            const response = await deathsAPI.requestRandomDeath()
+            commit(`setLoading`, false)
             commit(`setDeaths`, response.data)
         }
     },
