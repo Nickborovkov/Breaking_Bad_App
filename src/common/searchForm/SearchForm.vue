@@ -1,24 +1,25 @@
 <template>
     <v-container>
-<!--        :error-messages="formErrors"-->
-<!--        @input="getItemsByName(formInput)"-->
-        <v-text-field
-                outlined
-                v-model="formInput"
+            <v-text-field
+                    outlined
+                    v-model="formInput"
+                    :error-messages="formErrors"
+                    @input="getItemsByName(formInput)"
+                    :label="formLabel"
+                    color="green"
+                    :hint="formHint"
+                    @keydown.enter="getItemsByName(formInput)"
 
-                :label="formLabel"
-                color="green"
-                @keydown.enter="getItemsByName(formInput)"
-
-        ></v-text-field>
+            ></v-text-field>
     </v-container>
 </template>
 
 <script>
 
-    import {alpha} from 'vuelidate/lib/validators'
+    import { helpers } from 'vuelidate/lib/validators'
 
-    // const customValidator = (value) =>
+    const alpha = helpers.regex('alpha', /^[a-zA -]*$/)
+    const fullName = helpers.regex('fullName', /^[a-zA-]+ [a-zA-]+$/)
 
     export default {
         data: () => ({
@@ -26,25 +27,45 @@
         }),
         props: {
             formLabel: String,
-            getItems: Function
+            formHint: String,
+            getItems: Function,
+            parentType: String,
         },
         validations: {
-            formInput: {alpha}
+            formInput: {
+                alpha,
+                fullName,
+            }
         },
         computed: {
-            // formErrors() {
-            //     const errors = []
-            //     if (!this.$v.formInput.$dirty) return errors
-            //     !this.$v.formInput.alpha && errors.push('Only English letters')
-            //     return errors
-            // },
+            formErrors() {
+                const errors = []
+                if(this.parentType === `characters`){
+                    if (!this.$v.formInput.$dirty) return errors
+                    !this.$v.formInput.alpha && errors.push('Only English letters')
+                }
+                if(this.parentType === `fullName`){
+                    if (!this.$v.formInput.$dirty) return errors
+                    !this.$v.formInput.fullName && errors.push('Please enter full character name in english')
+                }
+                    return errors
+
+            },
         },
         methods: {
             getItemsByName(value) {
-                // this.$v.formInput.$touch()
-                // if (this.$v.formInput.alpha && this.formInput !== ``) {
-                    this.getItems(value)
-                // }
+                if(this.parentType === `characters`){
+                    this.$v.formInput.$touch()
+                    if (this.$v.formInput.alpha && this.formInput !== ``) {
+                        this.getItems(value)
+                    }
+                }
+                if(this.parentType === `fullName`){
+                    this.$v.formInput.$touch()
+                    if (this.$v.formInput.fullName && this.formInput !== ``) {
+                        this.getItems(value)
+                    }
+                }
             },
         },
     }
