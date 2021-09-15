@@ -2,7 +2,7 @@
     <v-container>
         <h1 class="text-center mt-5 mb-5">EPISODES</h1>
 
-        <v-layout wrap justify-center class="mb-5">
+        <v-layout wrap justify-center class="mt-5 mb-5">
             <v-btn xs12 md6
                     color="green"
                     @click="brBadShow"
@@ -25,33 +25,42 @@
         </v-layout>
 
 
-        <v-layout wrap justify-center v-if="breakingBadSeasons">
+        <v-layout wrap justify-center v-if="breakingBadSeasons" class="mb-5">
             <v-btn color="green"
                    class="ma-1"
                    small
-                   @click="getBreakingBadEpisodes">All
+                   @click="getBreakingBadEpisodes">
+                All
+                <v-icon right>mdi-format-list-text</v-icon>
             </v-btn>
             <v-btn :key="btn"
                    class="ma-1"
                    small
                    v-for="btn in 5"
                    @click="getEpisodesBySeason(`Breaking+Bad`, btn)"
-                   color="green">Season {{btn}}
+                   color="green">Season
+                <v-icon right>mdi-numeric-{{btn}}-box-outline</v-icon>
             </v-btn>
 
         </v-layout>
 
-        <v-layout wrap justify-center v-if="betterCallSaulSeasons">
+        <v-layout wrap justify-center v-if="betterCallSaulSeasons" class="mb-5">
                 <v-btn color="green"
                        class="ma-1"
                        small
-                       @click="getBetterCallSaulEpisodes">All</v-btn>
+                       @click="getBetterCallSaulEpisodes">
+                    All
+                    <v-icon right>mdi-format-list-text</v-icon>
+                </v-btn>
                 <v-btn :key="btn"
                        class="ma-1"
                        v-for="btn in 4"
                        small
                        @click="getEpisodesBySeason(`Better+Call+Saul`, btn)"
-                       color="green">Season {{btn}}</v-btn>
+                       color="green">
+                    Season
+                    <v-icon right>mdi-numeric-{{btn}}-box-outline</v-icon>
+                </v-btn>
         </v-layout>
 
 
@@ -65,109 +74,119 @@
             <v-flex xs12 sm4
                     :key="episode.episode_id"
                     v-for="episode in episodesList">
-                <v-card class="ma-3 pa-3" elevation="8">
-                    <v-card-title>
-                        Episode name:
-                    </v-card-title>
-                    <v-card-subtitle>
-                        {{episode.title}}
-                    </v-card-subtitle>
 
-                    <v-card-title>
-                        Series:
-                    </v-card-title>
-                    <v-card-subtitle>
-                        {{episode.series}}
-                    </v-card-subtitle>
+                <v-lazy
+                        height="450"
+                        :options="{threshold: .2}"
+                        transition="fade-transition"
+                >
+                    <v-card elevation="12" class="ma-3 pa-3">
+                        <v-card-title>
+                            Episode name:
+                        </v-card-title>
+                        <v-card-subtitle>
+                            {{episode.title}}
+                        </v-card-subtitle>
 
-                    <v-card-title>
-                        Season:
-                    </v-card-title>
+                        <v-card-title>
+                            Series:
+                        </v-card-title>
+                        <v-card-subtitle>
+                            {{episode.series}}
+                        </v-card-subtitle>
 
-                    <v-card-subtitle>
-                        {{episode.season}}
-                    </v-card-subtitle>
+                        <v-card-title>
+                            Season:
+                        </v-card-title>
 
-                    <v-card-title>
-                        Episode number:
-                    </v-card-title>
-                    <v-card-subtitle>
-                        {{episode.episode}}
-                    </v-card-subtitle>
+                        <v-card-subtitle>
+                            {{episode.season}}
+                        </v-card-subtitle>
 
-                    <v-dialog width="800">
-                        <template v-slot:activator="{ on, attrs }">
-                            <v-layout justify-center>
-                                <v-btn
-                                        color="green"
-                                        v-bind="attrs"
-                                        v-on="on"
-                                >
-                                    More info
-                                </v-btn>
-                            </v-layout>
+                        <v-card-title>
+                            Episode number:
+                        </v-card-title>
+                        <v-card-subtitle>
+                            {{episode.episode}}
+                        </v-card-subtitle>
 
-                        </template>
+                        <v-dialog width="700">
+                            <template v-slot:activator="{ on, attrs }">
+                                <v-layout justify-center>
+                                    <v-btn
+                                            color="green"
+                                            v-bind="attrs"
+                                            v-on="on"
+                                    >
+                                        <v-icon left>mdi-chevron-down</v-icon>
+                                        More info
+                                    </v-btn>
+                                </v-layout>
 
-                        <v-card>
+                            </template>
 
-                            <v-card-title>
-                                Episode name:
-                            </v-card-title>
-                            <v-card-subtitle>
-                                {{episode.title}}
-                            </v-card-subtitle>
+                            <v-card>
 
-                            <v-card-title>
-                                Series:
-                            </v-card-title>
-                            <v-card-subtitle>
-                                {{episode.series}}
-                            </v-card-subtitle>
+                                <v-card-title>
+                                    Episode name:
+                                </v-card-title>
+                                <v-card-subtitle>
+                                    {{episode.title}}
+                                </v-card-subtitle>
 
-                            <v-card-title>
-                                Episode number:
-                            </v-card-title>
-                            <v-card-subtitle>
-                                {{episode.episode}}
-                            </v-card-subtitle>
+                                <v-card-title>
+                                    Series:
+                                </v-card-title>
+                                <v-card-subtitle>
+                                    {{episode.series}}
+                                </v-card-subtitle>
 
-                            <v-card-title>
-                                Season:
-                            </v-card-title>
+                                <v-card-title>
+                                    Episode number:
+                                </v-card-title>
+                                <v-card-subtitle>
+                                    {{episode.episode}}
+                                </v-card-subtitle>
 
-                            <v-card-subtitle>
-                                {{episode.season}}
-                            </v-card-subtitle>
+                                <v-card-title>
+                                    Season:
+                                </v-card-title>
 
-                            <v-card-title>
-                                Episode date:
-                            </v-card-title>
+                                <v-card-subtitle>
+                                    {{episode.season}}
+                                </v-card-subtitle>
 
-                            <v-card-subtitle>
-                                {{episode.air_date}}
-                            </v-card-subtitle>
+                                <v-card-title>
+                                    Episode date:
+                                </v-card-title>
 
-                            <v-card-title>
-                                Episode series:
-                            </v-card-title>
+                                <v-card-subtitle>
+                                    {{episode.air_date}}
+                                </v-card-subtitle>
 
-                            <v-card-subtitle>
-                                {{episode.series}}
-                            </v-card-subtitle>
+                                <v-card-title>
+                                    Episode series:
+                                </v-card-title>
 
-                            <v-card-title>
-                                Episode Characters:
-                            </v-card-title>
+                                <v-card-subtitle>
+                                    {{episode.series}}
+                                </v-card-subtitle>
 
-                            <v-card-subtitle>
-                                <p :key="character" v-for="character in episode.characters">{{character}}</p>
-                            </v-card-subtitle>
-                        </v-card>
+                                <v-card-title>
+                                    Episode Characters:
+                                </v-card-title>
 
-                    </v-dialog>
+                                <v-card-subtitle>
+                                    <p :key="character" v-for="character in episode.characters">{{character}}</p>
+                                </v-card-subtitle>
+                            </v-card>
 
-                </v-card>
+                        </v-dialog>
+
+                    </v-card>
+                </v-lazy>
+
+
             </v-flex>
         </v-layout>
 
