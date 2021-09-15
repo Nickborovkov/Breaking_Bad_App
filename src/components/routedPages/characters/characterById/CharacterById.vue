@@ -10,7 +10,10 @@
                     <v-btn
                             block
                             color="green"
-                            to="/characters">Back to list</v-btn>
+                            to="/characters">
+                        <v-icon left>mdi-arrow-left</v-icon>
+                        Back to list
+                    </v-btn>
                 </v-flex>
             </v-layout>
 
