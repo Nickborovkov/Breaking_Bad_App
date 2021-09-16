@@ -10,3 +10,6 @@
 //TODO `deploy to github pages`
 //TODO `add logo`
 
+//TODO `validation works incorrectly with capital letters in english`
+//TODO `validate on enter on mobile`
+//TODO `hash mode instead history mode`
