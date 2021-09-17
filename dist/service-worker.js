@@ -14,10 +14,10 @@
 importScripts("https://storage.googleapis.com/workbox-cdn/releases/4.3.1/workbox-sw.js");
 
 importScripts(
-  "/Breaking_Bad_App/precache-manifest.498b551395a7ad945e6ba259cbf51249.js"
+  "/Breaking_Bad_App/precache-manifest.e2b52b024de30ed1f2df54036b5ff0f0.js"
 );
 
-workbox.core.setCacheNameDetails({prefix: "breaking_bad_app"});
+workbox.core.setCacheNameDetails({prefix: "Breaking_Bad_App"});
 
 self.addEventListener('message', (event) => {
   if (event.data && event.data.type === 'SKIP_WAITING') {
