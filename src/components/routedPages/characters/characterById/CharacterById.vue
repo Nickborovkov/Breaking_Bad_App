@@ -10,7 +10,8 @@
                     <v-btn
                             block
                             color="green"
-                            to="/characters">
+                            @click="$router.back()"
+                    >
                         <v-icon left>mdi-arrow-left</v-icon>
                         Back to list
                     </v-btn>
