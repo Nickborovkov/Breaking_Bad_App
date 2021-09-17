@@ -12,8 +12,19 @@
                 ></v-app-bar-nav-icon>
 
                 <v-toolbar-title>
-                    <router-link class="homeLink"
-                                 to="/">Breaking Bad App</router-link>
+
+
+                    <router-link
+                            class="homeLink"
+                            to="/"
+                    >
+                        <v-layout justify-center align-center>
+                            <v-img class="mr-3" width="40" src="@/assets/images/appLogo.png"></v-img>
+                            Breaking Bad App
+                        </v-layout>
+
+                    </router-link>
+
                 </v-toolbar-title>
 
                 <v-spacer></v-spacer>
@@ -40,7 +51,7 @@
 </template>
 
 <script>
-    export default {
+        export default {
         props: {
             menuItems: Array,
         },
