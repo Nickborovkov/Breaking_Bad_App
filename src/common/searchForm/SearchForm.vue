@@ -1,16 +1,21 @@
 <template>
     <v-container>
+        <v-form>
             <v-text-field
                     outlined
+                    append-icon="mdi-magnify"
+                    color="green"
+                    :hint="formHint"
+                    :label="formLabel"
                     v-model="formInput"
                     :error-messages="formErrors"
                     @input="getItemsByName(formInput)"
-                    :label="formLabel"
-                    color="green"
-                    :hint="formHint"
                     @keydown.enter="getItemsByName(formInput)"
+                    @click:append="getItemsByName(formInput)"
+            >
+            </v-text-field>
+        </v-form>
 
-            ></v-text-field>
     </v-container>
 </template>
 
@@ -18,8 +23,8 @@
 
     import { helpers } from 'vuelidate/lib/validators'
 
-    const alpha = helpers.regex('alpha', /^[a-zA -]*$/)
-    const fullName = helpers.regex('fullName', /^[a-zA-]+ [a-zA-]+$/)
+    const alpha = helpers.regex('alpha', /^[a-zA-Z -]*$/)
+    const fullName = helpers.regex('fullName', /^[a-zA-Z -]+ [a-zA-Z -]+$/)
 
     export default {
         data: () => ({
