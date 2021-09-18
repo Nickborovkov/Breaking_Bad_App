@@ -1,10 +1,10 @@
 self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
-    "revision": "5cca7f1edc28c39a0068",
+    "revision": "b548fc136bf8be25674b",
     "url": "/Breaking_Bad_App/css/app.1b3cdf77.css"
   },
   {
-    "revision": "74277864316ae73ae3e5",
+    "revision": "86d5ea6242cd347a9589",
     "url": "/Breaking_Bad_App/css/chunk-1d5a7010.0fa3b89f.css"
   },
   {
@@ -16,36 +16,36 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/Breaking_Bad_App/img/appLogo.681bdb00.png"
   },
   {
-    "revision": "1b3fb3c87131eb6c8c690394d013e6ef",
+    "revision": "8baf5b82f5b5f0325c830a06c3c9780a",
     "url": "/Breaking_Bad_App/index.html"
   },
   {
-    "revision": "5cca7f1edc28c39a0068",
-    "url": "/Breaking_Bad_App/js/app.a9907d9a.js"
+    "revision": "b548fc136bf8be25674b",
+    "url": "/Breaking_Bad_App/js/app.c660b086.js"
   },
   {
-    "revision": "da8eb3614c7e017851e2",
-    "url": "/Breaking_Bad_App/js/chunk-0bcfeac3.5511f744.js"
+    "revision": "6c73c62e9f0a2a03b958",
+    "url": "/Breaking_Bad_App/js/chunk-0bcfeac3.e938b2c7.js"
   },
   {
-    "revision": "5f403356eb1e8681e4b9",
-    "url": "/Breaking_Bad_App/js/chunk-1a6c1965.df2cf1cc.js"
+    "revision": "3dcd6cba22d42ee36bba",
+    "url": "/Breaking_Bad_App/js/chunk-1a6c1965.c9f564c2.js"
   },
   {
-    "revision": "74277864316ae73ae3e5",
-    "url": "/Breaking_Bad_App/js/chunk-1d5a7010.4dd53571.js"
+    "revision": "86d5ea6242cd347a9589",
+    "url": "/Breaking_Bad_App/js/chunk-1d5a7010.9013ea02.js"
   },
   {
-    "revision": "ad821506d31edeb8fa1b",
-    "url": "/Breaking_Bad_App/js/chunk-2d0c4870.ecc2ea20.js"
+    "revision": "2b3193977e3262c7a730",
+    "url": "/Breaking_Bad_App/js/chunk-2d0c4870.e16de06a.js"
   },
   {
-    "revision": "93f93d857da10a3bc715",
-    "url": "/Breaking_Bad_App/js/chunk-2d0e9726.0a8d028a.js"
+    "revision": "ed92df71b622675d9a8f",
+    "url": "/Breaking_Bad_App/js/chunk-2d0e9726.02397828.js"
   },
   {
-    "revision": "a14cf8876c6b89de50e9",
-    "url": "/Breaking_Bad_App/js/chunk-47a88e88.1085c7a4.js"
+    "revision": "fe5d6dd4bd78d43927bc",
+    "url": "/Breaking_Bad_App/js/chunk-47a88e88.3000cd55.js"
   },
   {
     "revision": "21231d4f37817bda4f7d",
