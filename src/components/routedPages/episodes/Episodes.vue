@@ -2,6 +2,7 @@
     <v-container>
         <h1 class="text-center mt-5 mb-5">EPISODES</h1>
 
+        <!--Choose series buttons-->
         <v-layout wrap justify-center class="mt-5 mb-5">
             <v-btn xs12 md6
                     color="green"
@@ -24,7 +25,8 @@
             </v-btn>
         </v-layout>
 
-
+        <!--Choose season buttons-->
+        <!--Choose Breaking Bad season-->
         <v-layout wrap justify-center v-if="breakingBadSeasons" class="mb-5">
             <v-btn color="green"
                    class="ma-1"
@@ -41,9 +43,9 @@
                    color="green">Season
                 <v-icon right>mdi-numeric-{{btn}}-box-outline</v-icon>
             </v-btn>
-
         </v-layout>
 
+        <!--Choose Better Call Saul season-->
         <v-layout wrap justify-center v-if="betterCallSaulSeasons" class="mb-5">
                 <v-btn color="green"
                        class="ma-1"
@@ -63,131 +65,23 @@
                 </v-btn>
         </v-layout>
 
-
+        <!--Preloader component-->
         <appPreloader v-if="isLoading"></appPreloader>
 
+        <!--Items rendering-->
         <v-layout
                 v-else
                 wrap
                 justify-center
         >
-            <v-flex xs12 sm4
+            <v-flex
+                    xs12 sm4
                     :key="episode.episode_id"
-                    v-for="episode in episodesList">
-
-                <v-lazy
-                        height="450"
-                        :options="{threshold: .2}"
-                        transition="fade-transition"
-                >
-                    <v-card elevation="12" class="ma-3 pa-3">
-                        <v-card-title>
-                            Episode name:
-                        </v-card-title>
-                        <v-card-subtitle>
-                            {{episode.title}}
-                        </v-card-subtitle>
-
-                        <v-card-title>
-                            Series:
-                        </v-card-title>
-                        <v-card-subtitle>
-                            {{episode.series}}
-                        </v-card-subtitle>
-
-                        <v-card-title>
-                            Season:
-                        </v-card-title>
-
-                        <v-card-subtitle>
-                            {{episode.season}}
-                        </v-card-subtitle>
-
-                        <v-card-title>
-                            Episode number:
-                        </v-card-title>
-                        <v-card-subtitle>
-                            {{episode.episode}}
-                        </v-card-subtitle>
-
-                        <v-dialog width="700">
-                            <template v-slot:activator="{ on, attrs }">
-                                <v-layout justify-center>
-                                    <v-btn
-                                            color="green"
-                                            v-bind="attrs"
-                                            v-on="on"
-                                    >
-                                        <v-icon left>mdi-chevron-down</v-icon>
-                                        More info
-                                    </v-btn>
-                                </v-layout>
-
-                            </template>
-
-                            <v-card>
-
-                                <v-card-title>
-                                    Episode name:
-                                </v-card-title>
-                                <v-card-subtitle>
-                                    {{episode.title}}
-                                </v-card-subtitle>
-
-                                <v-card-title>
-                                    Series:
-                                </v-card-title>
-                                <v-card-subtitle>
-                                    {{episode.series}}
-                                </v-card-subtitle>
-
-                                <v-card-title>
-                                    Episode number:
-                                </v-card-title>
-                                <v-card-subtitle>
-                                    {{episode.episode}}
-                                </v-card-subtitle>
-
-                                <v-card-title>
-                                    Season:
-                                </v-card-title>
-
-                                <v-card-subtitle>
-                                    {{episode.season}}
-                                </v-card-subtitle>
-
-                                <v-card-title>
-                                    Episode date:
-                                </v-card-title>
-
-                                <v-card-subtitle>
-                                    {{episode.air_date}}
-                                </v-card-subtitle>
-
-                                <v-card-title>
-                                    Episode series:
-                                </v-card-title>
-
-                                <v-card-subtitle>
-                                    {{episode.series}}
-                                </v-card-subtitle>
-
-                                <v-card-title>
-                                    Episode Characters:
-                                </v-card-title>
-
-                                <v-card-subtitle>
-                                    <p :key="character" v-for="character in episode.characters">{{character}}</p>
-                                </v-card-subtitle>
-                            </v-card>
-
-                        </v-dialog>
-
-                    </v-card>
-                </v-lazy>
-
-
+                    v-for="episode in episodesList"
+            >
+                <appEpisodeItem :episode="episode"></appEpisodeItem>
             </v-flex>
+
         </v-layout>
 
     </v-container>
@@ -196,6 +90,7 @@
 <script>
 
     import Preloader from "../../../common/preloader/Preloader";
+    import EpisodeItem from "./episodeItem/EpisodeItem";
 
     export default {
         data () {
@@ -204,6 +99,13 @@
                 betterCallSaulSeasons: false,
             }
         },
+        components: {
+            appPreloader: Preloader,
+            appEpisodeItem: EpisodeItem
+        },
+        created() {
+            this.$store.dispatch(`getEpisodesBySeason`, {series:`Breaking+Bad`, season:1})
+        },
         computed: {
             episodesList() {
                 return this.$store.getters.getEpisodes
@@ -211,9 +113,6 @@
             isLoading() {
                 return this.$store.getters.getLoading
             },
-        },
-        created() {
-            this.$store.dispatch(`getEpisodesBySeason`, {series:`Breaking+Bad`, season:1})
         },
         methods: {
             getBreakingBadEpisodes() {
@@ -237,9 +136,6 @@
                 this.breakingBadSeasons = false
                 this.betterCallSaulSeasons = false
             }
-        },
-        components: {
-            appPreloader: Preloader,
         }
     }
 

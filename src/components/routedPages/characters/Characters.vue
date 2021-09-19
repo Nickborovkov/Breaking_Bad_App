@@ -25,25 +25,17 @@
                 <v-container v-if="more" class="mt-5 mb-5">
                     <v-layout justify-center class="mt-5 mb-5" wrap>
                         <v-flex xs12 sm12 md12 lg6>
-                            <v-slider md12 lg6
-                                      v-model="random"
-                                      color="green"
-                                      track-color="grey"
-                                      max="62"
-                                      min="0"
-                                      thumb-label="always"
-                                      ticks
+                            <v-slider md12 lg6 v-model="random" color="green"
+                                      track-color="grey" max="62" min="0"
+                                      thumb-label="always" ticks
                                       hint="Choose amount of random characters"
                             ></v-slider>
 
                         </v-flex>
 
                         <v-flex xs12 sm12 md12 lg6>
-                            <v-btn
-                                    block
-                                    small
-                                    color="green"
-                                    @click="getRandom(random)"
+                            <v-btn block small color="green"
+                                   @click="getRandom(random)"
                             >
                                 Show {{random}} random
                             </v-btn>
@@ -72,27 +64,11 @@
 
 
                 <v-flex xs12 sm4 lg3
-                        :key="item.char_id"
-                        v-for="item in charactersList">
-                    <v-lazy :options="{threshold: .2}"
-                            transition="fade-transition">
-                    <v-card elevation="12"
-                            class="ma-3"
-                            :to="`characters/character/${item.char_id}`">
-                        <v-img
-                                :src="item.img"
-                                height="500"
-                        ></v-img>
-
-                        <v-card-title>
-                            <h3 class="text-center d-block text-truncate">{{item.name}}</h3>
-                        </v-card-title>
-
-                    </v-card>
-                    </v-lazy>
+                        :key="character.char_id"
+                        v-for="character in charactersList"
+                >
+                    <appCharacterItem :character="character"></appCharacterItem>
                 </v-flex>
-
-
         </v-layout>
 
 
@@ -102,6 +78,7 @@
 <script>
     import Preloader from "../../../common/preloader/Preloader";
     import SearchForm from "../../../common/searchForm/SearchForm";
+    import CharacterItem from "./charactersItem/CharacterItem";
 
     export default {
         data: () => ({
@@ -109,6 +86,11 @@
             more: false,
             charactersSlider: 0
         }),
+        components: {
+            appSearch: SearchForm,
+            appPreloader: Preloader,
+            appCharacterItem: CharacterItem,
+        },
         computed: {
             charactersList() {
                 return this.$store.getters.getCharacters
@@ -135,10 +117,6 @@
                 this.$store.dispatch(`getCharactersByName`, value)
             }
         },
-        components: {
-            appSearch: SearchForm,
-            appPreloader: Preloader,
-        }
     }
 
 </script>

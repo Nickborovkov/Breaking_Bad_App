@@ -5,12 +5,14 @@
         <v-layout justify-center class="mb-5">
             <v-flex xs12 md8>
 
+                <!--Search field for choosing a Character's death-->
                 <appSearch
                         formLabel="Enter name to see character's death info"
                         formHint="Note, that endpoint works only with full names like: 'Walter White or Mike Ehrmantraut'"
                         :getItems="getDeathsByName"
                         parentType="fullName"></appSearch>
 
+                <!--More actions button-->
                 <v-layout justify-center>
                     <v-btn
                             color="green"
@@ -22,13 +24,16 @@
                     </v-btn>
                 </v-layout>
 
+                <!--Additional actions-->
                 <v-container v-if="more">
+                    <!--Search field for choosing Character's committed deaths count-->
                     <appSearch
                             formLabel="Enter name to see character's committed deaths"
                             formHint="Note, that endpoint works only with full names like: 'Walter White or Jesse Pinkman'"
                             :getItems="getCharacterDeathsCount"
                             parentType="fullName"></appSearch>
 
+                    <!--Show all deaths button-->
                     <v-layout justify-center>
                         <v-btn
                                 color="green"
@@ -41,13 +46,13 @@
                     </v-layout>
 
                 </v-container>
-
-
             </v-flex>
         </v-layout>
 
+        <!--Preloader component-->
         <appPreloader v-if="isLoading && count"></appPreloader>
 
+        <!--Rendering Character's committed deaths count-->
         <v-layout v-else-if="!isLoading && count" wrap justify-center>
             <v-flex xs12 sm4 :key="death" v-for="death in deathsList">
                 <v-card elevation="12">
@@ -57,75 +62,16 @@
             </v-flex>
         </v-layout>
 
+        <!--Preloader component-->
         <appPreloader v-if="isLoading && !count"></appPreloader>
 
+        <!--Rendering Character's death info-->
         <v-layout v-else-if="!isLoading && !count" wrap justify-center>
             <v-flex xs12 sm4
                     :key="death.death_id"
-                    v-for="death in deathsList">
-                <v-lazy height="650"
-                        :options="{threshold: .2}"
-                        transition="fade-transition">
-                    <v-card elevation="12" class="ma-3">
-                        <v-card-title>
-                            Death:
-                        </v-card-title>
-
-                        <v-card-subtitle>
-                            {{death.death}}
-                        </v-card-subtitle>
-
-                        <v-card-title>
-                            Cause:
-                        </v-card-title>
-
-                        <v-card-subtitle>
-                            {{death.cause}}
-                        </v-card-subtitle>
-
-                        <v-card-title>
-                            Responsible:
-                        </v-card-title>
-
-                        <v-card-subtitle>
-                            {{death.responsible}}
-                        </v-card-subtitle>
-
-                        <v-card-title>
-                            Last words:
-                        </v-card-title>
-
-                        <v-card-subtitle>
-                            {{death.last_words}}
-                        </v-card-subtitle>
-
-                        <v-card-title>
-                            Season:
-                        </v-card-title>
-
-                        <v-card-subtitle>
-                            {{death.season}}
-                        </v-card-subtitle>
-
-                        <v-card-title>
-                            Episode:
-                        </v-card-title>
-
-                        <v-card-subtitle>
-                            {{death.episode}}
-                        </v-card-subtitle>
-
-                        <v-card-title>
-                            Number of deaths:
-                        </v-card-title>
-
-                        <v-card-subtitle>
-                            {{death.number_of_deaths}}
-                        </v-card-subtitle>
-
-                    </v-card>
-                </v-lazy>
-
+                    v-for="death in deathsList"
+            >
+                <appDeathItem :death="death"></appDeathItem>
             </v-flex>
         </v-layout>
 
@@ -136,39 +82,41 @@
 
     import SearchForm from "../../../common/searchForm/SearchForm";
     import Preloader from "../../../common/preloader/Preloader";
+    import DeathItem from "./deathItem/DeathItem";
 
     export default {
-        data () {
+        data() {
             return {
-                more :false,
+                more: false,
                 count: false,
             }
         },
+        components: {
+            appSearch: SearchForm,
+            appPreloader: Preloader,
+            appDeathItem: DeathItem,
+        },
+        created() {
+            this.$store.dispatch(`getDeaths`)
+        },
         computed: {
-            deathsList () {
+            deathsList() {
                 return this.$store.getters.getDeaths
             },
             isLoading() {
                 return this.$store.getters.getLoading
             },
         },
-        created() {
-            this.$store.dispatch(`getDeaths`)
-        },
-        components: {
-            appSearch: SearchForm,
-            appPreloader: Preloader,
-        },
         methods: {
-            getAllDeaths () {
+            getAllDeaths() {
                 this.count = false
                 this.$store.dispatch(`getDeaths`)
             },
-            getDeathsByName (name) {
+            getDeathsByName(name) {
                 this.$store.dispatch(`getDeathsByName`, name)
                 this.count = false
             },
-            getCharacterDeathsCount (name) {
+            getCharacterDeathsCount(name) {
                 this.$store.dispatch(`getCharacterDeathsCount`, name)
                 this.count = true
             },
@@ -176,7 +124,3 @@
     }
 
 </script>
-
-<style scoped>
-
-</style>

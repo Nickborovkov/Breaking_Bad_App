@@ -10,6 +10,7 @@
                                :getItems="getQuotesByAuthor"
                                parentType="fullName"></appSearchForm>
 
+                <!--More actions button-->
                 <v-layout justify-center>
                     <v-btn
                             color="green"
@@ -21,7 +22,9 @@
                     </v-btn>
                 </v-layout>
 
+                <!--Additional actions-->
                 <v-layout class="ma-2" justify-center wrap v-if="more">
+
                     <v-btn
                             class="ma-2"
                             color="green"
@@ -31,6 +34,7 @@
                         <v-icon left>mdi-view-list</v-icon>
                         Show all quotes
                     </v-btn>
+
                     <v-btn
                             class="ma-2"
                             small
@@ -40,6 +44,7 @@
                         <v-icon left>mdi-flask</v-icon>
                         Show all Breaking Bad quotes
                     </v-btn>
+
                     <v-btn
                             class="ma-2"
                             color="green"
@@ -54,45 +59,16 @@
             </v-flex>
         </v-layout>
 
+        <!--Preloader component-->
         <appPreloader v-if="isLoading"></appPreloader>
 
+        <!--Rendering quotes items-->
         <v-layout v-else wrap justify-center>
             <v-flex xs12 sm4
                     :key="quote.quote_id"
-                    v-for="quote in quotesList">
-
-                <v-lazy height="400"
-                        :options="{threshold: .2}"
-                        transition="fade-transition">
-                    <v-card elevation="12" class="ma-3" height="350">
-                        <v-card-title>
-                            Quote:
-                        </v-card-title>
-
-                        <v-card-subtitle>
-                            {{quote.quote}}
-                        </v-card-subtitle>
-
-                        <v-card-title>
-                            Author:
-                        </v-card-title>
-
-                        <v-card-subtitle>
-                            {{quote.author}}
-                        </v-card-subtitle>
-
-                        <v-card-title>
-                            Series:
-                        </v-card-title>
-
-                        <v-card-subtitle>
-                            {{quote.series}}
-                        </v-card-subtitle>
-
-                    </v-card>
-                </v-lazy>
-
-
+                    v-for="quote in quotesList"
+            >
+                <appQuoteItem :quote="quote"></appQuoteItem>
             </v-flex>
         </v-layout>
 
@@ -103,12 +79,21 @@
 
     import SearchForm from "../../../common/searchForm/SearchForm";
     import Preloader from "../../../common/preloader/Preloader";
+    import QuoteItem from "./quoteItem/QuoteItem";
 
     export default {
         data () {
             return {
                 more: false,
             }
+        },
+        components: {
+            appSearchForm: SearchForm,
+            appPreloader: Preloader,
+            appQuoteItem: QuoteItem,
+        },
+        created() {
+            this.$store.dispatch(`getQuotesBySeries`, `Breaking+Bad`)
         },
         computed: {
             quotesList () {
@@ -117,9 +102,6 @@
             isLoading() {
                 return this.$store.getters.getLoading
             },
-        },
-        created() {
-            this.$store.dispatch(`getQuotesBySeries`, `Breaking+Bad`)
         },
         methods: {
             getAllQuotes () {
@@ -138,10 +120,7 @@
                 this.$store.dispatch(`getQuotesByAuthor`, author)
             }
         },
-        components: {
-            appSearchForm: SearchForm,
-            appPreloader: Preloader,
-        }
+
     }
 
 </script>
