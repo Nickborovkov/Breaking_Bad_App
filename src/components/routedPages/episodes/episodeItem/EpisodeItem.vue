@@ -1,66 +1,68 @@
 <template>
     <v-container>
-            <v-lazy
-                    height="450"
-                    :options="{threshold: .2}"
-                    transition="fade-transition"
-            >
-                <v-card elevation="12" class="ma-3 pa-3">
-                    <v-card-title>
-                        Episode name:
-                    </v-card-title>
-                    <v-card-subtitle>
-                        {{episode.title}}
-                    </v-card-subtitle>
+        <!--Lazy loading-->
+        <v-lazy
+                height="450"
+                :options="{threshold: .2}"
+                transition="fade-transition"
+        >
+            <v-card elevation="12" class="ma-3 pa-3">
 
-                    <v-card-title>
-                        Series:
-                    </v-card-title>
-                    <v-card-subtitle>
-                        {{episode.series}}
-                    </v-card-subtitle>
+                <!--Rendering item for preview-->
+                <div
+                        :key="index"
+                        v-for="(value, name, index) in episode"
+                >
+                    <div v-if="index == 1 || index == 2 || index == 5 || index == 6">
+                        <v-card-title class="text-capitalize">{{name}}</v-card-title>
+                        <v-card-subtitle>{{value}}</v-card-subtitle>
+                    </div>
+                </div>
 
-                    <v-card-title>
-                        Season:
-                    </v-card-title>
+                <!--Modal window with additional parameters-->
+                <v-dialog width="700">
+                    <template v-slot:activator="{ on, attrs }">
+                        <v-layout justify-center>
+                            <v-btn
+                                    color="green"
+                                    v-bind="attrs"
+                                    v-on="on"
+                            >
+                                <v-icon left>mdi-chevron-down</v-icon>
+                                More info
+                            </v-btn>
+                        </v-layout>
 
-                    <v-card-subtitle>
-                        {{episode.season}}
-                    </v-card-subtitle>
+                    </template>
 
-                    <v-card-title>
-                        Episode number:
-                    </v-card-title>
-                    <v-card-subtitle>
-                        {{episode.episode}}
-                    </v-card-subtitle>
+                    <v-card>
+                        <div
+                                :key="index"
+                                v-for="(value, name, index) in episode"
+                        >
+                            <div v-if="index !== 0">
+                                <div v-if="name !== `characters`">
+                                    <v-card-title class="text-capitalize">{{replaceItem(name)}}</v-card-title>
+                                    <v-card-subtitle>{{value}}</v-card-subtitle>
+                                </div>
+                                <div v-else>
+                                    <v-card-title class="text-capitalize">{{replaceItem(name)}}</v-card-title>
+                                    <v-card-subtitle>
+                                        <ul>
+                                            <li :key="subItem" v-for="subItem in value">{{subItem}}</li>
+                                        </ul>
+                                    </v-card-subtitle>
 
-                    <v-dialog width="700">
-                        <template v-slot:activator="{ on, attrs }">
-                            <v-layout justify-center>
-                                <v-btn
-                                        color="green"
-                                        v-bind="attrs"
-                                        v-on="on"
-                                >
-                                    <v-icon left>mdi-chevron-down</v-icon>
-                                    More info
-                                </v-btn>
-                            </v-layout>
+                                </div>
 
-                        </template>
+                            </div>
+                        </div>
+                    </v-card>
 
-                        <v-card>
-                            <v-container :key="item.title" v-for="item in episodeParams">
-                                <v-card-title>{{item.title}}</v-card-title>
-                                <v-card-subtitle>{{item.inner}}</v-card-subtitle>
-                            </v-container>
-                        </v-card>
+                </v-dialog>
 
-                    </v-dialog>
-
-                </v-card>
-            </v-lazy>
+            </v-card>
+        </v-lazy>
     </v-container>
 </template>
 
@@ -69,17 +71,10 @@
         props: {
             episode: Object
         },
-        computed: {
-            episodeParams () {
-                return [
-                    {title: `Episode name:`, inner: this.episode.title},
-                    {title: `Series:`, inner: this.episode.series},
-                    {title: `Episode number:`, inner: this.episode.episode},
-                    {title: `Season:`, inner: this.episode.season},
-                    {title: `Episode date:`, inner: this.episode.air_date},
-                    {title: `Episode series:`, inner: this.episode.series},
-                    {title: `Episode Characters:`, inner: this.episode.characters},
-                ]
+        methods: {
+            replaceItem (item) {
+                let newItem = item.split(`_`).join(` `)
+                return newItem
             }
         }
     }
