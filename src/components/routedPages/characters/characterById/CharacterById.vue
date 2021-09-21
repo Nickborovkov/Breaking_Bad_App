@@ -13,7 +13,7 @@
                             @click="$router.back()"
                     >
                         <v-icon left>mdi-arrow-left</v-icon>
-                        Back to list
+                        Go back
                     </v-btn>
                 </v-flex>
             </v-layout>
@@ -46,24 +46,32 @@
                 </v-flex>
                     <v-flex xs12 sm12 md6 lg6>
                         <div
-                                :key="item.char_id"
-                                v-for="item in specificCharacterItems"
+                                :key="index"
+                                v-for="(value, name, index) in specificCharacter"
                                 class="mb-5"
                         >
-                            <h2>{{item.inner.length > 0
-                                ? item.title + `:`
-                                : null}}</h2>
+                            <div v-if="name !== `char_id` && name !== `img`">
 
-                            <div v-if="typeof item.inner === `object`">
-                                <ul>
+                                <div v-if="name === `appearance` || name === `better_call_saul_appearance`">
+                                    <h3 class="text-capitalize">{{replaceItem(name)}}</h3>
+                                    <ul>
+                                        <li :key="subItem" v-for="subItem in value">{{subItem}} Season</li>
+                                    </ul>
+                                </div>
 
-                                    <li :key="subItem" v-for="subItem in item.inner">
-                                        {{item.title === `Occupation` ? subItem : `Season ` + subItem}}
-                                    </li>
+                                <div v-else-if="name === `occupation`">
+                                    <h3 class="text-capitalize">{{name}}</h3>
+                                    <ul>
+                                        <li :key="subItem" v-for="subItem in value">{{subItem}}</li>
+                                    </ul>
+                                </div>
 
-                                </ul>
+                                <div v-else>
+                                    <h3 class="text-capitalize">{{name}}</h3>
+                                    <p>{{value}}</p>
+                                </div>
+
                             </div>
-                            <p v-else>{{item.inner.length>0 ? item.inner: null}}</p>
                         </div>
 
                     </v-flex>
@@ -77,35 +85,28 @@
     import Preloader from "../../../../common/preloader/Preloader";
 
     export default {
-        props: [`id`],
+        props: {
+            id: String,
+        },
+        components: {
+            appPreloader: Preloader
+        },
+        created() {
+            this.$store.dispatch(`getCharactersById`, this.id)
+        },
         computed: {
             specificCharacter () {
                 return this.$store.getters.getSpecificCharacter
-            },
-            specificCharacterItems () {
-                const state = this.$store.getters.getSpecificCharacter
-                const items =  [
-                    {title: `Name`, inner: state.name},
-                    {title: `Nickname`, inner: state.nickname},
-                    {title: `Birthday`, inner: state.birthday},
-                    {title: `Occupation`, inner: state.occupation},
-                    {title: `Status`, inner: state.status},
-                    {title: `Category`, inner: state.category},
-                    {title: `Appearance`, inner: state.appearance},
-                    {title: `Better Call Saul appearance`, inner: state.better_call_saul_appearance},
-                    {title: `Portrayed`, inner: state.portrayed},
-                ]
-                return items
             },
             isLoading () {
                 return this.$store.getters.getLoading
             }
         },
-        created() {
-            this.$store.dispatch(`getCharactersById`, this.id)
-        },
-        components: {
-            appPreloader: Preloader
+        methods: {
+            replaceItem (item) {
+                let newItem = item.split(`_`).join(` `)
+                return newItem
+            }
         }
     }
 </script>
