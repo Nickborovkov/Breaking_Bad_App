@@ -14,7 +14,7 @@
 importScripts("https://storage.googleapis.com/workbox-cdn/releases/4.3.1/workbox-sw.js");
 
 importScripts(
-  "/Breaking_Bad_App/precache-manifest.7fa860c1751d5c5a7862398d4c607e1a.js"
+  "/Breaking_Bad_App/precache-manifest.41024c7b934bee103da578b7b0597610.js"
 );
 
 workbox.core.setCacheNameDetails({prefix: "Breaking_Bad_App"});
