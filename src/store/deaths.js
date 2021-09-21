@@ -60,12 +60,9 @@ export default {
                 commit(`setLoading`, true)
                 const response = await deathsAPI.requestRandomDeath()
                 commit(`setLoading`, false)
-                if(response.data.length > 0) {
-                    commit(`setError`, null)
-                    commit(`setDeaths`, response.data)
-                }else {
-                    commit(`setError`, `No result`)
-                }
+                commit(`setError`, null)
+                commit(`setDeaths`, response.data)
+                commit(`setError`, `No result`)
             }catch (error) {
                 commit(`setError`, error.message)
             }

@@ -11,6 +11,7 @@
 
                     <h2 class="text-center green">Random Characters</h2>
 
+                    <!--Carousel with 5 random characters-->
                     <v-carousel cycle delimiter-icon="mdi-minus" show-arrows-on-hover>
                         <v-carousel-item
                                 v-for="item in charactersList"
@@ -34,47 +35,43 @@
             </v-flex>
         </v-layout>
 
+        <!--Preloader component-->
         <appPreloader v-if="isLoading"></appPreloader>
 
+        <!--Random quote info-->
         <v-layout v-else justify-center class="mb-16">
             <v-flex xs12 sm4>
                 <v-card :to="`/quotes`" elevation="12">
 
                     <h2 class="text-center green">Random Quote</h2>
 
-                    <v-divider></v-divider>
-                    <v-card-title>Author: </v-card-title>
-                    <v-card-subtitle>{{randomQuote.author}}</v-card-subtitle>
-                    <v-card-title>Series: </v-card-title>
-                    <v-card-subtitle>{{randomQuote.series}}</v-card-subtitle>
-                    <v-card-title>Quote: </v-card-title>
-                    <v-card-subtitle>{{randomQuote.quote}}</v-card-subtitle>
+                    <div :key="index" v-for="(value, name, index) in randomQuote">
+                        <div v-if="index !==  0">
+                            <v-card-title class="text-capitalize">{{name}}</v-card-title>
+                            <v-card-subtitle>{{value}}</v-card-subtitle>
+                        </div>
+                    </div>
                 </v-card>
             </v-flex>
         </v-layout>
 
+        <!--Preloader component-->
         <appPreloader v-if="isLoading"></appPreloader>
 
+        <!--Random death info-->
         <v-layout v-else justify-center class="mb-16">
             <v-flex xs12 sm4>
                 <v-card :to="`/deaths`" elevation="12">
 
                     <h2 class="text-center green">Random Death</h2>
 
-                    <v-divider></v-divider>
+                    <div :key="index" v-for="(value, name, index) in randomDeath">
+                        <div v-if="index === 1 || index === 2 || index === 3 || index === 4">
+                            <v-card-title class="text-capitalize">{{name}}</v-card-title>
+                            <v-card-subtitle>{{value}}</v-card-subtitle>
+                        </div>
 
-                    <v-card-title>Death:</v-card-title>
-                    <v-card-subtitle>{{randomDeath.death}}</v-card-subtitle>
-                    <v-card-title>Cause:</v-card-title>
-                    <v-card-subtitle>{{randomDeath.cause}}</v-card-subtitle>
-                    <v-card-title>Responsible</v-card-title>
-                    <v-card-subtitle>{{randomDeath.responsible}}</v-card-subtitle>
-                    <v-card-title>Last words:</v-card-title>
-                    <v-card-subtitle>{{randomDeath.last_words}}</v-card-subtitle>
-                    <v-card-title>Season</v-card-title>
-                    <v-card-subtitle>{{randomDeath.season}}</v-card-subtitle>
-                    <v-card-title>Episode</v-card-title>
-                    <v-card-subtitle>{{randomDeath.episode}}</v-card-subtitle>
+                    </div>
                 </v-card>
             </v-flex>
         </v-layout>
