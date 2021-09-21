@@ -41,10 +41,14 @@
                                 v-for="(value, name, index) in episode"
                         >
                             <div v-if="index !== 0">
+
+                                <!--When value is a string-->
                                 <div v-if="name !== `characters`">
                                     <v-card-title class="text-capitalize">{{replaceItem(name)}}</v-card-title>
                                     <v-card-subtitle>{{value}}</v-card-subtitle>
                                 </div>
+
+                                <!--When value is an array-->
                                 <div v-else>
                                     <v-card-title class="text-capitalize">{{replaceItem(name)}}</v-card-title>
                                     <v-card-subtitle>

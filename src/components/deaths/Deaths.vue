@@ -52,6 +52,7 @@
         <!--Preloader component-->
         <appPreloader v-if="isLoading && count"></appPreloader>
 
+        <!--Error case-->
         <v-card
                 v-if="error && count"
                 color="error"
@@ -73,6 +74,7 @@
         <!--Preloader component-->
         <appPreloader v-if="isLoading && !count"></appPreloader>
 
+        <!--Error case-->
         <v-card
                 v-if="error && !count"
                 color="error"

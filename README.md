@@ -11,6 +11,6 @@
 ## Used external libraries
 - VUEX
 - Vue-resource
-- axios
+- Axios
 - Vuetify
 - Vuelidate

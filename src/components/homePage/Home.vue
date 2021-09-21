@@ -2,6 +2,7 @@
     <v-container>
         <h1 class="text-center mt-5 mb-5">HOME</h1>
 
+        <!--Preloader component-->
         <appPreloader v-if="isLoading"></appPreloader>
 
         <v-layout v-else justify-center class="mb-16">

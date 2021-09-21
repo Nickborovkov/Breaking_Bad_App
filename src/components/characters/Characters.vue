@@ -11,6 +11,7 @@
                         :getItems="getCharacterByName"
                         parentType="characters"></appSearch>
 
+                <!--More actions button-->
                 <v-layout justify-center>
                     <v-btn
                             color="green"
@@ -22,6 +23,7 @@
                     </v-btn>
                 </v-layout>
 
+                <!--Additional actions-->
                 <v-container v-if="more" class="mt-5 mb-5">
                     <v-layout justify-center class="mt-5 mb-5" wrap>
                         <v-flex xs12 sm12 md12 lg6>
@@ -55,8 +57,10 @@
             </v-flex>
         </v-layout>
 
+        <!--Preloader component-->
         <appPreloader v-if="isLoading"></appPreloader>
 
+        <!--Error case-->
         <v-card
                 v-if="error"
                 color="error"
@@ -65,6 +69,7 @@
             <h2 class="text-center">No results found</h2>
         </v-card>
 
+        <!--Rendering characters items-->
         <v-layout
                 v-else
                 wrap

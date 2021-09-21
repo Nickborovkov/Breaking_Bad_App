@@ -62,6 +62,7 @@
         <!--Preloader component-->
         <appPreloader v-if="isLoading"></appPreloader>
 
+        <!--Error case-->
         <v-card
                 v-if="error"
                 color="error"

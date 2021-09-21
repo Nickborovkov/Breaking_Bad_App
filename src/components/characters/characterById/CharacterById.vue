@@ -1,6 +1,7 @@
 <template>
     <v-container>
 
+        <!--Preloader component-->
         <appPreloader v-if="isLoading"></appPreloader>
 
         <v-container v-else>
@@ -22,6 +23,8 @@
 
             <v-layout wrap justify-center>
                 <v-flex xs12 sm12 md6 lg6>
+
+                    <!--Modal window-->
                     <v-dialog width="1000">
 
                         <template v-slot:activator="{ on, attrs }">
@@ -52,14 +55,20 @@
                         >
                             <div v-if="name !== `char_id` && name !== `img`">
 
+                                <!--When value is an array-->
                                 <div v-if="name === `appearance` || name === `better_call_saul_appearance`">
                                     <h3 class="text-capitalize">{{replaceItem(name)}}</h3>
+
+                                    <!--When array is empty-->
                                     <p v-if="value.length === 0">Character didn't act in series</p>
+
+                                    <!--When array is not empty-->
                                     <ul v-else>
                                         <li :key="subItem" v-for="subItem in value">{{subItem}} Season</li>
                                     </ul>
                                 </div>
 
+                                <!--When value is an array-->
                                 <div v-else-if="name === `occupation`">
                                     <h3 class="text-capitalize">{{name}}</h3>
                                     <ul>
@@ -67,6 +76,7 @@
                                     </ul>
                                 </div>
 
+                                <!--When value is a string-->
                                 <div v-else>
                                     <h3 class="text-capitalize">{{name}}</h3>
                                     <p>{{value}}</p>

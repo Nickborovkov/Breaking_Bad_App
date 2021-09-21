@@ -1,8 +1,10 @@
 <template>
     <v-container>
+
         <v-lazy height="400"
                 :options="{threshold: .2}"
                 transition="fade-transition">
+
             <v-card elevation="12" class="ma-3" height="350">
                 <div :key="index" v-for="(value, name, index) in quote">
                     <div v-if="index !== 0">
@@ -11,7 +13,9 @@
                     </div>
                 </div>
             </v-card>
+
         </v-lazy>
+
     </v-container>
 </template>
 
