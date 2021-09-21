@@ -1,34 +1,34 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
-import Home from "../components/routedPages/homePage/Home";
+import Home from "../components/homePage/Home";
 
 // lazy loading
 
 const Characters = resolve => {
-    require.ensure([`../components/routedPages/characters/Characters`], () => {
+    require.ensure([`../components/characters/Characters`], () => {
         resolve(
-            require(`../components/routedPages/characters/Characters`)
+            require(`../components/characters/Characters`)
         )
     })
 }
 const Episodes = resolve => {
-    require.ensure([`../components/routedPages/episodes/Episodes`], () => {
+    require.ensure([`../components/episodes/Episodes`], () => {
         resolve(
-            require(`../components/routedPages/episodes/Episodes`)
+            require(`../components/episodes/Episodes`)
         )
     })
 }
 const Quotes = resolve => {
-    require.ensure([`../components/routedPages/quotes/Quotes`], () => {
+    require.ensure([`../components/quotes/Quotes`], () => {
         resolve(
-            require(`../components/routedPages/quotes/Quotes`)
+            require(`../components/quotes/Quotes`)
         )
     })
 }
 const Deaths = resolve => {
-    require.ensure([`../components/routedPages/deaths/Deaths`], () => {
+    require.ensure([`../components/deaths/Deaths`], () => {
         resolve(
-            require(`../components/routedPages/deaths/Deaths`)
+            require(`../components/deaths/Deaths`)
         )
     })
 }
@@ -40,9 +40,9 @@ const Page404 = resolve => {
     })
 }
 const CharacterById = resolve => {
-    require.ensure([`../components/routedPages/characters/characterById/CharacterById`], () => {
+    require.ensure([`../components/characters/characterById/CharacterById`], () => {
         resolve(
-            require(`../components/routedPages/characters/characterById/CharacterById`)
+            require(`../components/characters/characterById/CharacterById`)
         )
     })
 }

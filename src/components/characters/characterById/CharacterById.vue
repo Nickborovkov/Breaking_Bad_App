@@ -82,7 +82,7 @@
 </template>
 
 <script>
-    import Preloader from "../../../../common/preloader/Preloader";
+    import Preloader from "../../../common/preloader/Preloader";
 
     export default {
         props: {

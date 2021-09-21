@@ -76,8 +76,8 @@
 </template>
 
 <script>
-    import Preloader from "../../../common/preloader/Preloader";
-    import SearchForm from "../../../common/searchForm/SearchForm";
+    import Preloader from "../../common/preloader/Preloader";
+    import SearchForm from "../../common/searchForm/SearchForm";
     import CharacterItem from "./charactersItem/CharacterItem";
 
     export default {

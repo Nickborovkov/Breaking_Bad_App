@@ -77,8 +77,8 @@
 
 <script>
 
-    import SearchForm from "../../../common/searchForm/SearchForm";
-    import Preloader from "../../../common/preloader/Preloader";
+    import SearchForm from "../../common/searchForm/SearchForm";
+    import Preloader from "../../common/preloader/Preloader";
     import QuoteItem from "./quoteItem/QuoteItem";
 
     export default {

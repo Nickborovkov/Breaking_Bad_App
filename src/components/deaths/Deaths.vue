@@ -80,8 +80,8 @@
 
 <script>
 
-    import SearchForm from "../../../common/searchForm/SearchForm";
-    import Preloader from "../../../common/preloader/Preloader";
+    import SearchForm from "../../common/searchForm/SearchForm";
+    import Preloader from "../../common/preloader/Preloader";
     import DeathItem from "./deathItem/DeathItem";
 
     export default {
