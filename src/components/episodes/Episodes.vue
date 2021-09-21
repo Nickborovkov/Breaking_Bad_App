@@ -93,6 +93,9 @@
     import EpisodeItem from "./episodeItem/EpisodeItem";
 
     export default {
+        props: {
+            season: String,
+        },
         data () {
             return {
                 breakingBadSeasons: false,
@@ -104,6 +107,9 @@
             appEpisodeItem: EpisodeItem
         },
         created() {
+            if(this.season){
+                this.$store.dispatch(`getEpisodesBySeason`, {series:`Breaking+Bad`, season:1})
+            }
             this.$store.dispatch(`getEpisodesBySeason`, {series:`Breaking+Bad`, season:1})
         },
         computed: {

@@ -52,6 +52,14 @@
         <!--Preloader component-->
         <appPreloader v-if="isLoading && count"></appPreloader>
 
+        <v-card
+                v-if="error && count"
+                color="error"
+                class="ma-10 pt-6 pb-6"
+        >
+            <h2 class="text-center">No results found</h2>
+        </v-card>
+
         <!--Rendering Character's committed deaths count-->
         <v-layout v-else-if="!isLoading && count" wrap justify-center>
             <v-flex xs12 sm4 :key="death" v-for="death in deathsList">
@@ -64,6 +72,14 @@
 
         <!--Preloader component-->
         <appPreloader v-if="isLoading && !count"></appPreloader>
+
+        <v-card
+                v-if="error && !count"
+                color="error"
+                class="ma-10 pt-6 pb-6"
+        >
+            <h2 class="text-center">No results found</h2>
+        </v-card>
 
         <!--Rendering Character's death info-->
         <v-layout v-else-if="!isLoading && !count" wrap justify-center>
@@ -97,6 +113,7 @@
             appDeathItem: DeathItem,
         },
         created() {
+            this.$store.commit(`setError`, null)
             this.$store.dispatch(`getDeaths`)
         },
         computed: {
@@ -105,6 +122,9 @@
             },
             isLoading() {
                 return this.$store.getters.getLoading
+            },
+            error() {
+                return this.$store.getters.getError
             },
         },
         methods: {

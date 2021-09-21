@@ -62,6 +62,14 @@
         <!--Preloader component-->
         <appPreloader v-if="isLoading"></appPreloader>
 
+        <v-card
+                v-if="error"
+                color="error"
+                class="ma-10 pt-6 pb-6"
+        >
+            <h2 class="text-center">No results found</h2>
+        </v-card>
+
         <!--Rendering quotes items-->
         <v-layout v-else wrap justify-center>
             <v-flex xs12 sm4
@@ -93,6 +101,7 @@
             appQuoteItem: QuoteItem,
         },
         created() {
+            this.$store.commit(`setError`, null)
             this.$store.dispatch(`getQuotesBySeries`, `Breaking+Bad`)
         },
         computed: {
@@ -101,6 +110,9 @@
             },
             isLoading() {
                 return this.$store.getters.getLoading
+            },
+            error() {
+                return this.$store.getters.getError
             },
         },
         methods: {

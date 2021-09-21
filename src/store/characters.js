@@ -15,28 +15,69 @@ export default {
     },
     actions: {
         async getRandomCharacters ({commit}, count) {
-            commit(`setLoading`, true)
-            const response = await charactersAPI.requestRandomCharacters(count)
-            commit(`setLoading`, false)
-            commit(`setCharacters`, response.data)
+            try {
+                commit(`setLoading`, true)
+                const response = await charactersAPI.requestRandomCharacters(count)
+                commit(`setLoading`, false)
+                if(response.data.length > 0){
+                    commit(`setError`, null)
+                    commit(`setCharacters`, response.data)
+                }else{
+                    commit(`setError`, `No results`)
+                }
+
+            }catch (error) {
+                commit(`setError`, error.message)
+            }
+
         },
         async getCharactersByName ({commit}, characters) {
-            commit(`setLoading`, true)
-            const response = await charactersAPI.requestCharactersByName(characters)
-            commit(`setLoading`, false)
-            commit(`setCharacters`, response.data)
+            try {
+                commit(`setLoading`, true)
+                const response = await charactersAPI.requestCharactersByName(characters)
+                commit(`setLoading`, false)
+                if(response.data.length > 0){
+                    commit(`setError`, null)
+                    commit(`setCharacters`, response.data)
+                }else {
+                    commit(`setError`, `No results`)
+                }
+            }catch (error) {
+                commit(`setError`, error.message)
+            }
+
         },
         async getCharactersById ({commit}, id) {
-            commit(`setLoading`, true)
-            const response = await charactersAPI.requestCharactersByid(id)
-            commit(`setLoading`, false)
-            commit(`setSpecificCharacter`, response.data[0])
+            try {
+                commit(`setLoading`, true)
+                const response = await charactersAPI.requestCharactersByid(id)
+                commit(`setLoading`, false)
+                if(response.data.length > 0) {
+                    commit(`setError`, null)
+                    commit(`setSpecificCharacter`, response.data[0])
+                }else {
+                    commit(`setError`, `No results`)
+                }
+            }catch (error) {
+                commit(`setError`, error.message)
+            }
+
         },
         async getAllCharacters ({commit}) {
-            commit(`setLoading`, true)
-            const response = await charactersAPI.requestAllCharacters()
-            commit(`setLoading`, false)
-            commit(`setCharacters`, response.data)
+            try {
+                commit(`setLoading`, true)
+                const response = await charactersAPI.requestAllCharacters()
+                commit(`setLoading`, false)
+                if(response.data.length > 0) {
+                    commit(`setError`, null)
+                    commit(`setCharacters`, response.data)
+                }else {
+                    commit(`setError`, `No results`)
+                }
+            }catch (error) {
+                commit(`setError`, error.message)
+            }
+
         },
     },
     getters: {

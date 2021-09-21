@@ -54,7 +54,8 @@
 
                                 <div v-if="name === `appearance` || name === `better_call_saul_appearance`">
                                     <h3 class="text-capitalize">{{replaceItem(name)}}</h3>
-                                    <ul>
+                                    <p v-if="value.length === 0">Character didn't act in series</p>
+                                    <ul v-else>
                                         <li :key="subItem" v-for="subItem in value">{{subItem}} Season</li>
                                     </ul>
                                 </div>
@@ -104,6 +105,7 @@
         },
         methods: {
             replaceItem (item) {
+                if(item === `appearance`){item = `Breaking Bad Appearance`}
                 let newItem = item.split(`_`).join(` `)
                 return newItem
             }

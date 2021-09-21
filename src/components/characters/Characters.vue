@@ -57,6 +57,14 @@
 
         <appPreloader v-if="isLoading"></appPreloader>
 
+        <v-card
+                v-if="error"
+                color="error"
+                class="ma-10 pt-6 pb-6"
+        >
+            <h2 class="text-center">No results found</h2>
+        </v-card>
+
         <v-layout
                 v-else
                 wrap
@@ -98,8 +106,12 @@
             isLoading() {
                 return this.$store.getters.getLoading
             },
+            error() {
+                return this.$store.getters.getError
+            },
         },
         created() {
+            this.$store.commit(`setError`, null)
             this.$store.dispatch(`getRandomCharacters`, 8)
         },
         methods: {

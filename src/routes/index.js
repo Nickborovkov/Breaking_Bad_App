@@ -68,6 +68,7 @@ const routes = [
     },
     {
         path: `/episodes`,
+        props: true,
         name: `episodes`,
         component: Episodes,
     },

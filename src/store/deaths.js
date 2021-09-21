@@ -11,28 +11,64 @@ export default {
     },
     actions: {
         async getDeaths ({commit}) {
-            commit(`setLoading`, true)
-            const response = await deathsAPI.requestAllDeaths()
-            commit(`setLoading`, false)
-            commit(`setDeaths`, response.data)
+            try {
+                commit(`setLoading`, true)
+                const response = await deathsAPI.requestAllDeaths()
+                commit(`setLoading`, false)
+                if(response.data.length > 0) {
+                    commit(`setError`, null)
+                    commit(`setDeaths`, response.data)
+                }else {
+                    commit(`setError`, `No result`)
+                }
+            }catch (error) {
+                commit(`setError`, error.message)
+            }
         },
         async getDeathsByName ({commit}, name) {
-            commit(`setLoading`, true)
-            const response = await deathsAPI.requestDeathByName(name)
-            commit(`setLoading`, false)
-            commit(`setDeaths`, response.data)
+            try {
+                commit(`setLoading`, true)
+                const response = await deathsAPI.requestDeathByName(name)
+                commit(`setLoading`, false)
+                if(response.data.length > 0) {
+                    commit(`setError`, null)
+                    commit(`setDeaths`, response.data)
+                }else {
+                    commit(`setError`, `No result`)
+                }
+            }catch (error) {
+                commit(`setError`, error.message)
+            }
         },
         async getCharacterDeathsCount ({commit}, name) {
-            commit(`setLoading`, true)
-            const response = await deathsAPI.requestDeathCount(name)
-            commit(`setLoading`, false)
-            commit(`setDeaths`, response.data)
+            try {
+                commit(`setLoading`, true)
+                const response = await deathsAPI.requestDeathCount(name)
+                commit(`setLoading`, false)
+                if(response.data[0].deathCount > 0) {
+                    commit(`setError`, null)
+                    commit(`setDeaths`, response.data)
+                }else {
+                    commit(`setError`, `No result`)
+                }
+            }catch (error) {
+                commit(`setError`, error.message)
+            }
         },
         async getRandomDeath ({commit}) {
-            commit(`setLoading`, true)
-            const response = await deathsAPI.requestRandomDeath()
-            commit(`setLoading`, false)
-            commit(`setDeaths`, response.data)
+            try {
+                commit(`setLoading`, true)
+                const response = await deathsAPI.requestRandomDeath()
+                commit(`setLoading`, false)
+                if(response.data.length > 0) {
+                    commit(`setError`, null)
+                    commit(`setDeaths`, response.data)
+                }else {
+                    commit(`setError`, `No result`)
+                }
+            }catch (error) {
+                commit(`setError`, error.message)
+            }
         }
     },
     getters: {

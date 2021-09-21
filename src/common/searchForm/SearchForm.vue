@@ -3,6 +3,7 @@
         <v-form>
             <v-text-field
                     outlined
+                    clearable
                     append-icon="mdi-magnify"
                     color="green"
                     :hint="formHint"
