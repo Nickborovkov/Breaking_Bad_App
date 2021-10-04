@@ -2,6 +2,8 @@
 
 ![image](https://github.com/Nickborovkov/Breaking_Bad_App/blob/master/appScreenshot.png)
 
+## [See deployment](https://nickborovkov.github.io/Breaking_Bad_App/#/)
+
 ## What it can do:
 - The app is responsive
 - Search characters in *Breaking Bad* and *Better Call Saul* series
