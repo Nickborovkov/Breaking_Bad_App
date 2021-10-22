@@ -1,3 +1,3 @@
 module.exports = {
-    publicPath: '/Breaking_Bad_App/'
+    publicPath: '/Breaking_Bad_DB/'
 }
