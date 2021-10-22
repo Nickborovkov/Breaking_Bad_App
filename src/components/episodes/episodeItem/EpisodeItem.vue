@@ -72,9 +72,7 @@
 
 <script>
     export default {
-        props: {
-            episode: Object
-        },
+        props: ['episode'],
         methods: {
             replaceItem (item) {
                 let newItem = item.split(`_`).join(` `)

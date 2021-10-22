@@ -30,8 +30,6 @@
 
 <script>
     export default {
-        props: {
-            character: Object,
-        }
+        props: ['character']
     }
 </script>

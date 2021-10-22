@@ -17,9 +17,7 @@
 
 <script>
     export default {
-        props: {
-            death: Object
-        },
+        props: ['death'],
         methods: {
             replaceItem (value) {
                 let newValue = value.split(`_`).join(` `)

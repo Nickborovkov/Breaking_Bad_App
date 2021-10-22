@@ -62,7 +62,7 @@
 
         <!--Error case-->
         <v-card
-                v-if="error"
+                v-else-if="error"
                 color="error"
                 class="ma-10 pt-6 pb-6"
         >
