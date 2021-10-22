@@ -1,11 +1,11 @@
 # Project that show Breaking Bad and Better Call Saul Series data built with [Breaking Bad API](https://www.breakingbadapi.com/documentation)
 
-![image](https://github.com/Nickborovkov/Breaking_Bad_App/blob/master/appScreenshot.png)
+![image](https://github.com/Nickborovkov/Breaking_Bad_DB/blob/master/src/assets/appScreenshot.png)
 
-## [See deployment](https://nickborovkov.github.io/Breaking_Bad_App/#/)
+## [See deployment](https://nickborovkov.github.io/Breaking_Bad_DB/#/)
 
 ## What it can do:
-- The app is responsive
+- The app is responsive (Vuetify layout)
 - Search characters in *Breaking Bad* and *Better Call Saul* series
 - Search episodes in *Breaking Bad* and *Better Call Saul* series
 - Search characters quotes in *Breaking Bad* and *Better Call Saul* series
