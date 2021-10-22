@@ -1,4 +1,4 @@
-import {charactersAPI} from "../serverRequests/serverRequests";
+import {charactersAPI} from "../API/serverRequests";
 
 export default {
     state: {

@@ -1,4 +1,4 @@
-import {episodesAPI} from "../serverRequests/serverRequests";
+import {episodesAPI} from "../API/serverRequests";
 
 export default {
     state: {

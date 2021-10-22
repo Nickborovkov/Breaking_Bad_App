@@ -89,7 +89,7 @@
 
 <script>
 
-    import Preloader from "../../common/preloader/Preloader";
+    import Preloader from "../common/preloader/Preloader";
     import EpisodeItem from "./episodeItem/EpisodeItem";
 
     export default {

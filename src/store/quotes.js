@@ -1,4 +1,4 @@
-import {quotesAPI} from "../serverRequests/serverRequests";
+import {quotesAPI} from "../API/serverRequests";
 
 export default {
     state: {

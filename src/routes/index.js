@@ -40,7 +40,7 @@ const routes = [
     {
         path: `*`,
         name: `404`,
-        component: () => import(/*webpackChunkName: "Page404"*/`../common/page404/Page404`),
+        component: () => import(/*webpackChunkName: "ErrorPage"*/`../components/common/page404/Page404`),
     },
 ]
 

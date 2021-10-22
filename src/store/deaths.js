@@ -1,4 +1,4 @@
-import {deathsAPI} from "../serverRequests/serverRequests";
+import {deathsAPI} from "../API/serverRequests";
 
 export default {
     state: {
